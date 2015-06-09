@@ -54,7 +54,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 
-public class StoreMapActivity extends MMActivity implements FragmentManager.OnBackStackChangedListener{
+public class StoreMapActivity extends MMActivity implements FragmentManager.OnBackStackChangedListener {
     // if zoom level is bigger than DEFAULT_ZOOM_LEVEL, modify google map camera zoom level to DEFAULT_ZOOM_LEVEL
     private final static int DEFAULT_ZOOM_LEVEL = 16;
     private final static int CAMERA_BOUNDS_PADDING = 80;
@@ -64,6 +64,7 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
     private View mLayout;
     private RelativeLayout mRlEmpty;
     private RelativeLayout mRlOnLoading;
+    private RelativeLayout mRlNoNetwork;
     private RelativeLayout mRlSearchStoreLayout;
     private FrameLayout mFlMapContainer;
     private SeekBar mSbNearbyDist;
@@ -82,7 +83,7 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
     private StoreResultAdapter mStoreResultAdapter = null;
     private StoreData mSelectedStoreData = null;
     private Location mCurLocation;
-//    private Messenger mMessenger;
+    //    private Messenger mMessenger;
     /* TODO: It maybe need to be refactor. */
     private Bitmap mUserPinBitmap;
     private Bitmap mStorePinBitmap;
@@ -111,6 +112,7 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
     private void findView() {
         mRlEmpty = (RelativeLayout) findViewById(R.id.rl_empty_data);
         mRlOnLoading = (RelativeLayout) findViewById(R.id.rl_on_loading);
+        mRlNoNetwork = (RelativeLayout) findViewById(R.id.rl_no_network);
         mFlMapContainer = (FrameLayout) findViewById(R.id.fl_store_map_container);
         mRlSearchStoreLayout = (RelativeLayout) findViewById(R.id.rl_search_store_layout);
         mSbNearbyDist = (SeekBar) findViewById(R.id.sb_nearby_dist);
@@ -172,8 +174,8 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
         options.inScaled = false;
         options.inDensity = mMetrics.densityDpi;
 
-        scaledWidth = (int)(((double)mMetrics.widthPixels / standScreenWidth) * standIconWidth);
-        scaledHeight = (int)(((double)mMetrics.heightPixels / standScreenHeight) * standIconHeight);
+        scaledWidth = (int) (((double) mMetrics.widthPixels / standScreenWidth) * standIconWidth);
+        scaledHeight = (int) (((double) mMetrics.heightPixels / standScreenHeight) * standIconHeight);
 
         /* TODO: Need to be refactor */
         try {
@@ -187,7 +189,7 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
             err.printStackTrace();
         }
 
-        if(tmpBmp != bmp) {
+        if (tmpBmp != bmp) {
             Utility.releaseBitmaps(tmpBmp);
             tmpBmp = null;
         }
@@ -216,7 +218,7 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
         mSbNearbyDist.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if(fromUser) {
+                if (fromUser) {
                     mTvNearbyDist.setText(Integer.toString(progress + 2));
                 }
             }
@@ -243,6 +245,7 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onStart() {
         GoogleAnalytics.getInstance(this).reportActivityStart(this);
@@ -281,11 +284,11 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
 
     @Override
     public void onBackPressed() {
-        if(!mIsLoadingFinished) {
+        if (!mIsLoadingFinished) {
             return;
         }
 
-        if(mRlSearchStoreLayout.getVisibility() == View.GONE) {
+        if (mRlSearchStoreLayout.getVisibility() == View.GONE) {
             mFlMapContainer.setVisibility(View.GONE);
             mIvMapToggle.setImageBitmap(mCornerMapBitmap);
             mRlSearchStoreLayout.setVisibility(View.VISIBLE);
@@ -303,7 +306,19 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
     }
 
     private void doSearch(String keyword) {
-        if(!Utility.isLocationEnabled()) {
+        mLvNearbyStore.setVisibility(View.GONE);
+        mRlEmpty.setVisibility(View.GONE);
+
+        if (Utility.isNetworkConnected(mContext)) {
+            mRlNoNetwork.setVisibility(View.GONE);
+        } else {
+            mRlNoNetwork.setVisibility(View.VISIBLE);
+            closeProgressDialog();
+
+            return;
+        }
+
+        if (!Utility.isLocationEnabled()) {
             showAlertDialog(null, getString(R.string.store_map_msg_err_location_disabled), getString(R.string.title_positive_btn_label), null, null, null);
         }
 
@@ -319,8 +334,6 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
         params.put("language", mDeviceInfo.getLanguage() + "-" + mDeviceInfo.getLocale());
         mControl.getData(ConnectionControl.PLACE_NEARBY_SEARCH, this, params, REQ_PLACE_SEARCH);
 
-        mLvNearbyStore.setVisibility(View.GONE);
-        mRlEmpty.setVisibility(View.GONE);
         mRlOnLoading.setVisibility(View.VISIBLE);
     }
 
@@ -339,11 +352,11 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
         mGoogleMap.getUiSettings().setCompassEnabled(true);
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curLatLng, 16));
 
-        for(StoreData storeData : storeCollection) {
+        for (StoreData storeData : storeCollection) {
             String lat = storeData.getStoreLat();
             String lon = storeData.getStoreLong();
 
-            if(!Utility.isValidNumber(Double.class, lat) || !Utility.isValidNumber(Double.class, lon)) {
+            if (!Utility.isValidNumber(Double.class, lat) || !Utility.isValidNumber(Double.class, lon)) {
                 continue;
             }
 
@@ -367,7 +380,7 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
             public void onInfoWindowClick(Marker marker) {
                 mSelectedStoreData = mMarkerStoreMap.get(marker);
 
-                if(mSelectedStoreData == null) {
+                if (mSelectedStoreData == null) {
                     return;
                 }
 
@@ -429,8 +442,8 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
                 }
             }
 
-            if(!photoRef.equals("N/A")) {
-                final String photoWidth = (int)Math.max(Double.parseDouble(storeData.getPhotoWidth()), Double.parseDouble(storeData.getPhotoHeight())) + "";
+            if (!photoRef.equals("N/A")) {
+                final String photoWidth = (int) Math.max(Double.parseDouble(storeData.getPhotoWidth()), Double.parseDouble(storeData.getPhotoHeight())) + "";
 
                 Picasso.with(mContext).load(ConnectionControl.PLACE_PHOTO_SEARCH_URL + "maxwidth=" + photoWidth + "&photoreference=" + photoRef + "&sensor=true&key=" + getString(R.string.place_api_key)).placeholder(R.drawable.ic_no_image_available).into(ivPlacePhoto, new Callback() {
                     @Override
@@ -517,9 +530,9 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
 
     @Override
     public void callbackFromController(JSONObject jsonObj, String req) {
-        if(req.equals(REQ_PLACE_SEARCH)) {
+        if (req.equals(REQ_PLACE_SEARCH)) {
             try {
-                if(jsonObj.getString("status").equals("OK")) {
+                if (jsonObj.getString("status").equals("OK")) {
                     JSONArray resultAry = jsonObj.getJSONArray("results");
 
                     mRefStoreDataMap.clear();
@@ -537,7 +550,7 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
                             storeData.setStoreAddress((resultJson.has("vicinity")) ? resultJson.getString("vicinity") : "N/A");
                             storeData.setStoreRate((resultJson.has("rating")) ? resultJson.getString("rating") : "N/A");
 
-                            if(photoJsonObj != null) {
+                            if (photoJsonObj != null) {
                                 storeData.setPhotoReference(photoJsonObj.getString("photo_reference"));
                                 storeData.setPhotoWidth(photoJsonObj.getString("width"));
                                 storeData.setPhotoHeight(photoJsonObj.getString("height"));
@@ -584,22 +597,22 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        } else if(req.equals(REQ_PLACE_DETAIL)) {
+        } else if (req.equals(REQ_PLACE_DETAIL)) {
             try {
-                if(jsonObj.getString("status").equals("OK")) {
+                if (jsonObj.getString("status").equals("OK")) {
                     JSONObject resultJsonObj = jsonObj.getJSONObject("result");
                     Intent resultIntent = new Intent();
 
                     mSelectedStoreData.setStoreAddress(resultJsonObj.has("formatted_address") ? resultJsonObj.getString("formatted_address") : "");
                     mSelectedStoreData.setStorePhone(resultJsonObj.has("formatted_phone_number") ? resultJsonObj.getString("formatted_phone_number") : "");
-                    if(resultJsonObj.has("opening_hours")) {
+                    if (resultJsonObj.has("opening_hours")) {
                         JSONObject openingTimeInfoJson = resultJsonObj.getJSONObject("opening_hours");
 
-                        if(openingTimeInfoJson.has("periods")) {
+                        if (openingTimeInfoJson.has("periods")) {
                             JSONArray daysJsonAry = openingTimeInfoJson.getJSONArray("periods");
                             StringBuilder openDaysHours = new StringBuilder("");
 
-                            for(int i = 0, len = daysJsonAry.length() ; i < len ; i++) {
+                            for (int i = 0, len = daysJsonAry.length(); i < len; i++) {
                                 JSONObject dayJsonObj = daysJsonAry.getJSONObject(i);
                                 /* TODO: I assume it is pair-exist*/
                                 JSONObject openJsonObj = dayJsonObj.getJSONObject("open");
@@ -637,7 +650,7 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
 
         int id = v.getId();
 
-        switch(id) {
+        switch (id) {
             case R.id.btn_search: {
                 v.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_press_bounce));
                 doSearch(mEtStoreSearch.getText().toString());
@@ -649,13 +662,13 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
 //                Intent locationTrackIntent = new Intent(StoreMapActivity.this, LocationTrackService.class);
 
 //                locationTrackIntent.putExtra("ui_update_messenger", mMessenger);
-                if(mapVisibility == View.VISIBLE) {
+                if (mapVisibility == View.VISIBLE) {
 //                    locationTrackIntent.putExtra("is_location_track_on", false);
                     mFlMapContainer.setVisibility(View.GONE);
                     mRlSearchStoreLayout.setVisibility(View.VISIBLE);
 
                     mIvMapToggle.setImageBitmap(mCornerMapBitmap);
-                } else if(mapVisibility == View.GONE) {
+                } else if (mapVisibility == View.GONE) {
 //                    locationTrackIntent.putExtra("is_location_track_on", true);
                     mFlMapContainer.setVisibility(View.VISIBLE);
                     mRlSearchStoreLayout.setVisibility(View.GONE);
@@ -710,7 +723,7 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
             ViewGroup view = null;
             StoreData data = mStoreDataList.get(position);
 
-            if(convertView == null) {
+            if (convertView == null) {
                 view = (ViewGroup) mInflater.inflate(R.layout.view_store_location_list_item, parent, false);
 
                 changeLayoutConfig(view);
@@ -718,8 +731,8 @@ public class StoreMapActivity extends MMActivity implements FragmentManager.OnBa
                 view = (ViewGroup) convertView;
             }
 
-            TextView tvStoreName = (TextView)view.findViewById(R.id.tv_store_name);
-            TextView tvStoreAddress = (TextView)view.findViewById(R.id.tv_store_address);
+            TextView tvStoreName = (TextView) view.findViewById(R.id.tv_store_name);
+            TextView tvStoreAddress = (TextView) view.findViewById(R.id.tv_store_address);
 
             tvStoreName.setText(data.getStoreName());
             tvStoreAddress.setText(data.getStoreAddress());

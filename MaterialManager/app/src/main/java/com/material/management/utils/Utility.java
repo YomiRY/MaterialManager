@@ -15,6 +15,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -78,7 +80,7 @@ public class Utility {
         sDeviceInfo.setPlatformVersion("Android " + Build.VERSION.RELEASE);
         sDeviceInfo.setAppVersion(BuildConfig.VERSION_NAME);
         sDeviceInfo.setLanguage(Locale.getDefault().getLanguage());
-        sDeviceInfo.setLocale( Locale.getDefault().getCountry());
+        sDeviceInfo.setLocale(Locale.getDefault().getCountry());
     }
 
     public static MainActivity getMainActivity() {
@@ -321,6 +323,13 @@ public class Utility {
             return sSpSettings.getString(key, "1.0");
         }
         return sSpSettings.getString(key, "");
+    }
+
+    public static boolean isNetworkConnected(Context ctx) {
+        ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     public static Uri getUriFromPath(String filePath) {

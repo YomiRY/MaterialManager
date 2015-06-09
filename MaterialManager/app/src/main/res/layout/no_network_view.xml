@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rel_no_network_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <View
+            android:id="@+id/middleLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"/>
+
+    <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_above="@+id/middleLine"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/alertnonetconnect01_01"/>
+
+    <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/no_network_view_message1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#828282"
+            android:textSize="14sp"/>
+
+    <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="17dp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/no_network_view_message2"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#828282"
+            android:textSize="10sp"/>
+
+    <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/TextView01"
+            android:layout_below="@+id/TextView01"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="10dp"
+            android:text="@string/no_network_view_message3"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#828282"
+            android:textSize="10sp"/>
+
+    <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/TextView01"
+            android:layout_below="@+id/textView2"
+            android:gravity="center"
+            android:paddingRight="14dp"
+            android:text="@string/no_network_view_message4"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#828282"
+            android:textSize="10sp"/>
+
+</RelativeLayout>

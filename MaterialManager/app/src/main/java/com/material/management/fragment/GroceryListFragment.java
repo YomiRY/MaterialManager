@@ -1,6 +1,5 @@
 package com.material.management.fragment;
 
-import android.animation.Animator;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,9 +31,7 @@ import com.material.management.data.GroceryListData;
 import com.material.management.data.Material;
 import com.material.management.dialog.MaterialMenuDialog;
 import com.material.management.dialog.ReceiptDialog;
-import com.material.management.utils.AnimatorUtility;
 import com.material.management.utils.DBUtility;
-import com.material.management.utils.LogUtility;
 import com.picasso.Picasso;
 import java.io.File;
 import java.util.ArrayList;

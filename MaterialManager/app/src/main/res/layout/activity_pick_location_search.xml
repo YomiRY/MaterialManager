@@ -69,37 +69,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_search_dist_title">
+
             <SeekBar
                 android:id="@+id/sb_nearby_dist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/tv_nearby_dist_text"
                 android:max="5"
-                android:progress="0"/>
+                android:progress="0" />
 
             <TextView
                 android:id="@+id/tv_nearby_dist_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/tv_dist_unit"
-                android:layout_marginRight="5dp"
                 android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/tv_dist_unit"
                 android:text="5"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_size_medium"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_dist_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
                 android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
                 android:text="@string/title_nearby_dist_info"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_size_medium"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </RelativeLayout>
 
 
@@ -129,7 +130,7 @@
             android:fadingEdge="vertical"
             android:gravity="center_vertical"
             android:scrollbars="none"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -140,17 +141,24 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginBottom="20dp"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <include
         android:id="@+id/rl_empty_data"
         layout="@layout/no_data_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:gravity="center"
+        android:layout_centerInParent="true"
         android:textSize="20dip"
-        android:visibility="gone"/>
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/rl_no_network"
+        layout="@layout/no_network_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
     <FrameLayout
         android:id="@+id/fl_store_map_container"

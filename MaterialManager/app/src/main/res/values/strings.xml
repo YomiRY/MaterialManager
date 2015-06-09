@@ -12,6 +12,10 @@
     <string name="title_neutral_btn_import_in_expired">Import in expired</string>
 
     <string name="on_loading">Data Loading...</string>
+    <string name="no_network_view_message1">本項功能須連線網路使用</string>
+    <string name="no_network_view_message2">• 請確認您已開啟網路連線服務，且並未處於＂飛航模式＂中。</string>
+    <string name="no_network_view_message3">• 若您已開啟 Wi-Fi 服務，請確認連線網路為有效之無線服務。</string>
+    <string name="no_network_view_message4">• 若您正以 3G 服務連線中，請考慮移動至收訊較佳之位置。</string>
     <string name="data_progressing">Data handling...</string>
     <string name="data_save_success">Data saved successfully</string>
     <string name="data_save_fail">Data saved fail</string>
