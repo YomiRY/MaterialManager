@@ -1,5 +1,5 @@
 # MaterialManager
-It's a Expired-Monitor to monitor the expiration date of everything. The source code won't have any description here.
+It's a Expired-Monitor to monitor the expiration date of everything. There are not any description about the source code here.
 
 ![image](https://github.com/YomiRY/MaterialManager/blob/master/image-folder/device-1.png)
 
