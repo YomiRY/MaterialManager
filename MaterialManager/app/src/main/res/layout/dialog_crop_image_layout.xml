@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_crop_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_rotate_panel">
+
+        <com.material.management.component.cropper.CropImageView
+            android:id="@+id/civ_source_image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_rotate_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_rotate_left"
+            style="@style/RoboTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/turn_left"
+            android:textStyle="bold"
+            android:text="@string/rotate_Left"
+            android:textColor="@android:color/black"
+            android:background="@drawable/selector_crop_image" />
+
+        <TextView
+            android:id="@+id/btn_rotate_right"
+            style="@style/RoboTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@id/btn_rotate_left"
+            android:drawableRight="@drawable/turn_right"
+            android:text="@string/rotate_right"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:background="@drawable/selector_crop_image" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

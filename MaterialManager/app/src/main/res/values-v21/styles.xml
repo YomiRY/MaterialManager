@@ -1,0 +1,57 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- your theme inherits from the material theme -->
+    <style name="AppTheme" parent="android:Theme.Material.Light">
+        <!-- theme customizations -->
+        <item name="android:colorPrimary">@color/black</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:colorAccent">@color/gray</item>
+
+        <item name="android:editTextColor">@color/black</item>
+        <item name="android:editTextBackground">@drawable/edit_text_holo_light</item>
+
+        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/myPopupMenuTextAppearanceSmall</item>
+    </style>
+
+    <style name="myPopupMenuTextAppearanceSmall" parent="android:TextAppearance.Material.Widget.PopupMenu.Small">
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="myPopupMenuTextAppearanceLarge" parent="android:TextAppearance.Material.Widget.PopupMenu.Large">
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="SpinnerAppTheme" parent="@android:style/Widget.Spinner">
+        <item name="android:background">@drawable/spinner_background_holo_light</item>
+    </style>
+    <style name="SpinnerAppTheme.DropDown" parent="@style/SpinnerAppTheme">
+        <item name="android:spinnerMode">dropdown</item>
+        <item name="android:popupBackground">@drawable/spinner_drop_down_item_bg</item>
+    </style>
+
+    <!-- pop up alert dialog window -->
+    <style name="AlertDialogTheme" parent="android:Theme.Dialog">
+        <item name="android:alertDialogStyle">@style/AlertDialog</item>
+        <item name="android:textAppearanceMedium">@style/TextAppearance.Sphinx.Medium</item>
+        <item name="android:spinnerStyle">@android:style/Widget.Material.Light.Spinner</item>
+    </style>
+
+    <style name="TextAppearance.Sphinx.Medium" parent="@android:style/TextAppearance.Holo.Medium">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/alert_dialog_text_size</item>
+    </style>
+
+    <style name="AlertDialog">
+        <item name="android:fullBright">@android:color/transparent</item>
+        <item name="android:fullDark">@android:color/transparent</item>
+        <item name="android:topBright">@color/black</item>
+        <item name="android:topDark">@color/black</item>
+        <item name="android:centerBright">@color/white</item>
+        <item name="android:centerDark">@color/white</item>
+        <item name="android:centerMedium">@color/white</item>
+        <item name="android:bottomBright">@color/white</item>
+        <item name="android:bottomDark">@color/white</item>
+        <item name="android:bottomMedium">@color/white</item>
+    </style>
+
+</resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:layout_gravity="center">
+    <!--<TextView-->
+        <!--android:id="@+id/tv_qty"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginLeft="30dp"-->
+        <!--android:textColor="#ff343b3b"-->
+        <!--android:textSize="13.5sp"-->
+        <!--android:text="4"/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_item_name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_toRightOf="@id/tv_qty"-->
+        <!--android:layout_toLeftOf="@+id/tv_item_price"-->
+        <!--android:singleLine="true"-->
+        <!--android:ellipsize="end"-->
+        <!--android:textColor="#ff343b3b"-->
+        <!--android:textSize="13.5sp"-->
+        <!--android:text="item name"/>-->
+
+    <TextView
+        android:id="@+id/tv_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/tv_multip_symbol"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="#ff343b3b"
+        android:textSize="@dimen/receipt_checkout_info_size"
+        android:text="item name"/>
+
+    <TextView
+        android:id="@+id/tv_multip_symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:textColor="#ff343b3b"
+        android:textSize="@dimen/receipt_checkout_info_size"
+        android:text="x"/>
+
+    <TextView
+        android:id="@+id/tv_qty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/tv_multip_symbol"
+        android:layout_toLeftOf="@+id/tv_item_price"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:textColor="#ff343b3b"
+        android:textSize="@dimen/receipt_checkout_info_size"
+        android:text="10"/>
+
+    <TextView
+        android:id="@+id/tv_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:layout_marginRight="10dp"
+        android:textColor="#ff343b3b"
+        android:textSize="@dimen/receipt_checkout_info_size"
+        android:text="6.00"/>
+</RelativeLayout>

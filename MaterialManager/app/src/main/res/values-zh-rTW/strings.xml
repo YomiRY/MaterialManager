@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Common-->
+    <string name="title_notice_dialog">!!! 注意 !!!</string>
+    <string name="title_positive_btn_label">確定</string>
+    <string name="title_negative_btn_label">取消</string>
+    <string name="title_neutral_btn_import_in_expired">納入過期管理</string>
+
+    <string name="on_loading">資料載入中...</string>
+    <string name="data_progressing">資料處理中...</string>
+    <string name="data_save_success">!!資料儲存成功!!</string>
+    <string name="data_save_fail">!!資料儲存失敗!!</string>
+
+    <string name="ga_app_view_login_material_fragment">過期物品輸入頁面 - LoginMaterialFragment</string>
+    <string name="ga_app_view_material_manager_fragment">過期物品管理頁面 - MaterialManagerFragment</string>
+    <string name="ga_app_view_settings_fragment">設定頁面 - SettingsFragment</string>
+    <string name="ga_app_view_grocery_list_login_fragment">登入購物清單 - LoginGroceryListFragment</string>
+    <string name="ga_app_view_grocery_list_fragment">檢視購物清單列表 - GroceryListFragment</string>
+    <string name="ga_app_view_grocery_history_fragment">購物歷史 - GroceryHistoryFragment</string>
+
+    <!-- MainActivity -->
+    <string name="app_name">過期物品管家</string>
+    <string name="title_login_material">登入物品</string>
+    <string name="title_view_material">檢視物品</string>
+    <string name="menu_sort_by_date">排序(依據日期)</string>
+    <string name="menu_sort_by_name">排序(依據名稱)</string>
+    <string name="menu_sort_by_place">排序(依據放置地點)</string>
+    <string name="menu_grid_1x1">1 x 1 格列 </string>
+    <string name="menu_grid_2x1">1 x 2 格列</string>
+    <string name="menu_clear_expired_items">清除所有過期項目</string>
+    <string name="menu_share">分享</string>
+    <string name="menu_contact_us">聯絡我們</string>
+    <string name="menu_about">關於</string>
+
+    <string name="slidemenu_msg_second_back_key_quit">再按一次退鍵即退出</string>
+
+    <string name="slidemenu_material_management_title">過期管理</string>
+    <string name="slidemenu_material_login_title">登入物品</string>
+    <string name="slidemenu_material_view_title">檢視物品</string>
+
+    <string name="slidemenu_grocery_title">購物管理</string>
+    <string name="slidemenu_gcrocery_login_list_title">登入購物清單</string>
+    <string name="slidemenu_gcrocery_list_view_title">檢視購物清單列表</string>
+    <string name="slidemenu_grocery_history">購物歷史</string>
+
+    <string name="slidemenu_material_other">其它</string>
+    <string name="slidemenu_material_global_search">全域搜尋</string>
+    <string name="slidemenu_material_settings">設定</string>
+    <string name="slidemenu_material_about">關於</string>
+    <string name="slidemenu_material_feedback">問題回報</string>
+
+    <string name="feedback_mail">yianday0330@gmail.com</string>
+    <string name="feedback_subject">【過期物品管家】問題與意見回饋</string>
+    <string name="feedback_content">感謝您對過期物品管家的支持，若有任何建議，請在此填寫您的意見以及聯繫資料。\n\n系統平台版本: %1$s \n應用程式版本: %2$s\n設備種類: %3$s</string>
+
+    <!--StoreMapActivity-->
+    <string name="title_current_location">!!!目前所在的位置!!!</string>
+    <string name="title_nearby_search">臨近店家</string>
+    <string name="title_nearby_dist">臨近距離</string>
+    <string name="title_search_store_hint">請輸入店家名稱</string>
+    <string name="title_nearby_dist_info">公里 (最大值: 7 公里)</string>
+    <string name="title_marker_dist_info_kilo_meter">距離%1$s公里</string>
+    <string name="title_marker_dist_info_meter">距離%1$s公尺</string>
+    <string name="store_map_msg_err_location_disabled">定位功能尚未開啟，當前資料可能不準確，請重新開啟定位功能並重試</string>
+    <string name="store_map_msg_err_retry">暫無相關資料，請稍後再試</string>
+    <string name="store_map_msg_location_updating">位置更新中，請稍後...</string>
+
+    <!-- GlobalSearchActivity -->
+    <string name="global_search">全域搜尋</string>
+    <string name="global_search_material_group">過期物品</string>
+    <string name="global_search_grocery_group">購買物品</string>
+    <string name="global_search_rest_days_exp">%1$s天就過期</string>
+    <string name="global_search_material_qty">數量:</string>
+    <string name="global_search_material_price">單價:</string>
+
+    <!-- SettingActivity -->
+    <string name="setting_activity_label">設定</string>
+    <string name="title_tv_notification_types">過期通知型態</string>
+    <string name="title_tv_notification_vibrate">震動</string>
+    <string name="title_tv_notification_sound">鈴聲</string>
+    <string name="title_tv_notification_frequnecy_label">過期後通知頻率</string>
+    <string name="title_tv_font_size_label">字體調整</string>
+    <string name="title_tv_font_size_scale_first_label">調整為</string>
+    <string name="title_tv_font_size_scale_sec_label">字體</string>
+    <string name="title_tv_database_manage">資料庫備份/還原</string>
+    <string name="title_tv_backup_database">備份資料庫</string>
+    <string name="title_tv_restore_database">回復資料庫</string>
+    <string name="title_spin_notification_frequnecy_first_label">每</string>
+    <string name="title_spin_notification_frequnecy_sec_label">小時通知一次</string>
+    <string name="title_cloud_backup_restore">異地備源</string>
+    <string name="title_dropbox_enable">Dropbox備份/還原</string>
+    <string name="title_dropbox_backup_successfully">    -DropBox備份成功\n</string>
+    <string name="title_dropbox_backup_fail">    -DropBox備份失敗\n</string>
+    <string name="title_dropbox_restore_successfully">    -DropBox回復成功\n</string>
+    <string name="title_dropbox_restore_fail">    -DropBox回復失敗\n</string>
+    <string name="title_local_backup_successfully">    -本機端備份成功\n</string>
+    <string name="title_local_backup_fail">    -本機端備份失敗\n</string>
+    <string name="title_local_restore_successfully">    -本機端回復成功\n</string>
+    <string name="title_local_restore_fail">    -本機端回復失敗\n</string>
+    <string name="title_progress_startup">開始資料庫[備份/回復]操作</string>
+    <string name="title_progress_local_backup_successfully">本機端資料庫備份成功...\n(1/1)</string>
+    <string name="title_progress_local_restore_successfully">本機端資料庫回復成功...\n(1/1)</string>
+    <string name="title_progress_dropbox_backup_successfully">DropBox資料庫備份成功...\n(1/1)</string>
+    <string name="title_progress_dropbox_restore_successfully">DropBox資料庫回復成功...\n(1/1)</string>
+    <string name="title_progress_dropbox_backup_photo_successfully">備份圖片:\n%1$s\n(%2$s/100)</string>
+    <string name="title_progress_dropbox_restore_photo_successfully">回復圖片:\n%1$s\n(%2$s/100)</string>
+    <string name="title_progress_notif_backup_restore_successfully">[備份/回復]資料庫成功</string>
+    <string name="title_progress_notif_backup_restore_fail">[備份/回復]資料庫失敗</string>
+
+    <!--Grocery Login Activity-->
+    <string name="title_grocery_list_modify_actionbar_title">購物管理 - 清單資料修改</string>
+
+    <!--GroceryItemLoginActivity-->
+    <string name="title_grocery_item_login_actionbar_title">購物管理 - 輸入購買物品</string>
+    <string name="title_grocery_item_title">物品名稱</string>
+    <string name="title_grocery_item_hint">輸入物品名稱</string>
+    <string name="title_grocery_item_category">種類</string>
+    <string name="title_grocery_item_size">大小</string>
+    <string name="title_grocery_item_unit">單位</string>
+    <string name="title_grocery_item_fav">是否加為我的最愛</string>
+    <string name="title_grocery_item_note">項目備註</string>
+    <string name="title_grocery_item_note_hint">輸入項目備註(選擇性)</string>
+    <string name="title_grocery_item_tag">物品標籤</string>
+    <string name="title_grocery_item_quantity">數量</string>
+    <string name="title_grocery_item_price">單價</string>
+    <string name="title_grocery_item_priority">優先權</string>
+    <string name="title_grocery_item_list_note">清單備註</string>
+    <string name="title_grocery_item_list_note_hint">輸入清單備註(選擇性)</string>
+    <string name="title_grocery_item_coupon">優惠卷</string>
+    <string name="title_grocery_item_coupon_barcode">優惠卷條碼</string>
+    <string name="title_grocery_item_tax">稅金</string>
+    <string name="title_grocery_item_photo">物品圖片</string>
+    <string name="title_grocery_item_barcode">物品條碼</string>
+    <string name="priority">無優先權</string>
+    <string name="coupon_type">優惠卷種類</string>
+
+    <string-array name="title_grocery_item_units">
+        <item>個</item>
+        <item>雙</item>
+        <item>捆</item>
+        <item>件</item>
+        <item>盒</item>
+        <item>罐</item>
+        <item>串</item>
+        <item>箱</item>
+        <item>條</item>
+        <item>袋</item>
+        <item>包</item>
+        <item>公尺</item>
+        <item>公升</item>
+        <item>公斤</item>
+        <item>瓶</item>
+        <item>噸</item>
+        <item>桶</item>
+        <item>支</item>
+        <item>平方單元</item>
+        <item>碼</item>
+        <item>匙</item>
+        <item>湯匙</item>
+        <item>平方</item>
+        <item>片</item>
+        <item>份</item>
+        <item>卷</item>
+        <item>英鎊</item>
+        <item>品脫</item>
+        <item>撮</item>
+        <item>盎司</item>
+        <item>毫米</item>
+        <item>毫升</item>
+        <item>毫克</item>
+        <item>英寸</item>
+        <item>把</item>
+        <item>粒</item>
+        <item>加侖</item>
+        <item>英呎</item>
+        <item>滴</item>
+        <item>打</item>
+        <item>杯</item>
+        <item>釐米</item>
+        <item>厘升</item>
+    </string-array>
+
+    <string name="msg_grocery_item_login_error_head">你/妳違反了:\n</string>
+    <string name="msg_no_grocery_name">"    -名稱尚未輸入\n"</string>
+    <string name="msg_error_no_spercify_grocery_type">"    -未指定物品種類\n"</string>
+    <string name="msg_no_grocery_qty">"    -數量尚未輸入\n"</string>
+    <string name="msg_no_grocery_zero_qty_err">"    -數量不能為0\n"</string>
+
+    <!-- File Utility -->
+    <string name="title_photo_backup">圖片備份操作:\n</string>
+    <string name="title_photo_restore">圖片回復操作:\n</string>
+    <!-- DB Utility -->
+    <string name="title_db_backup">資料庫備份操作:\n</string>
+    <string name="title_db_restore">資料庫回復操作:\n</string>
+
+    <!-- LoginMaterialFragment -->
+    <string name="title_tv_material_name">物品名稱 :	 </string>
+    <string name="title_tv_barcode">條碼:	 </string>
+    <string name="title_tv_material_category">所屬分類 :	</string>
+    <string name="title_tv_purchace_date">購買日期 :	</string>
+    <string name="title_tv_valid_date">有效日期 :	</string>
+    <string name="title_tv_notification">過期前 :	</string>
+    <string name="title_tv_notification_days">天通知</string>
+    <string name="title_tv_material_pic">物品圖示 :	</string>
+    <string name="title_tv_material_place">放置地點 :	</string>
+    <string name="title_tv_comment">備註 :	</string>
+    <string name="title_btn_save">儲存</string>
+    <string name="title_btn_cancel">取消</string>
+    <string name="title_input_dialog">新增物品種類</string>
+    <string name="title_input_dialog_body">請輸入要新增的物品種類名稱</string>
+    <string name="title_single_choice_dialog">請選擇要刪除的項目</string>
+    <string name="item_spinner_empty"></string>
+    <string name="item_spinner_new_add">---新增---</string>
+    <string name="item_spinner_del">---刪除---</string>
+    <string name="msg_error_dialog_title">"!!! 資料錯誤 !!!"</string>
+    <string name="msg_error_msg_title">你/妳違反了:\n</string>
+    <string name="msg_error_no_material_name">"    -未輸入物品名稱\n"</string>
+    <string name="msg_error_no_spercify_material_type">"    -未指定物品種類\n"</string>
+    <string name="msg_error_no_correct_valid_date">"    -購買日期不可能晚於有效日期\n"</string>
+    <string name="msg_error_special_material_naming">"    -物品命名不能包含特殊字?, \\, /...等特殊字元\n"</string>
+    <string name="msg_remind_title">"提醒資訊"</string>
+    <string name="msg_remind_delete_material_type_title">"即將刪除已儲存在過期管理的該類所有物品，確定要刪除?"</string>
+    <string name="title_select_photo">選擇圖片來源</string>
+    <string name="title_select_photo_from_camera">拍照</string>
+    <string name="title_select_photo_from_album">相簿</string>
+    <string name="defalut_date">N/A</string>
+
+    <string-array name="default_material_type">
+        <item>食物</item>
+        <item>飲料</item>
+        <item>優惠卷</item>
+        <item>化妝品</item>
+    </string-array>
+
+    <!-- MaterialManagerFragment -->
+    <string name="title_material_search">請輸入搜尋字串</string>
+    <string name="title_menu_head">請選擇要執行的動作</string>
+    <string name="title_menu_item_add">新增</string>
+    <string name="title_menu_item_del">刪除</string>
+    <string name="title_menu_item_not_purchase">不購買</string>
+    <string name="title_menu_item_purchase">欲購買</string>
+    <string name="title_menu_item_modify">修改</string>
+    <string name="title_menu_item_as_type_photo">設定為封面</string>
+    <string name="title_menu_item_barcode">顯示物品條碼</string>
+    <string name="title_menu_item_set_up_valid_date">設定有效日期</string>
+    <string name="title_empty_data">(--資料為空--)</string>
+    <string name="format_material_type_count">尚有:%1$s件</string>
+    <string name="format_material_barcode">條碼 : </string>
+    <string name="format_material_type">物品種類 : </string>
+    <string name="format_purchace_date">購買日期 : </string>
+    <string name="format_valid_date">過期日期 : </string>
+    <string name="format_material_place">放置地點 : </string>
+    <string name="format_comment">備註 : </string>
+    <string name="title_no_data">暫無資料</string>
+
+    <!-- msg section -->
+    <string name="msg_expired">已過期</string>
+    <string name="msg_valid_date_no_set_up">過期未設定</string>
+    <string name="msg_set_as_face_success">已成功設定為種類封面</string>
+    <string name="exp_unit">天過期</string>
+    <string name="title_confirm_del_dialog">!!!注意!!!</string>
+    <string name="msg_confirm_del_dialog">確認是否刪除？</string>
+
+    <!-- LoginGroceryListFragment -->
+    <string name="title_grocery_name">清單名稱 : </string>
+    <string name="title_store_address_hint">點擊以選擇一個地點(非必要)</string>
+    <string name="title_nearby_alert">臨近地點時通知我(500公尺內)</string>
+    <string name="title_address">地址 : </string>
+    <string name="title_phone">電話 : </string>
+    <string name="title_service_time">營業時間</string>
+    <string name="title_service_open">開始時間</string>
+    <string name="title_service_close">結束時間</string>
+    <string name="title_map_loading">地圖載入中...</string>
+    <string name="title_service_time_default">設定</string>
+    <string name="title_service_time_default_in_db">N/A</string>
+
+    <string name="title_store_name_label_hint">新增店家名稱</string>
+    <string name="title_store_name_label">店家名稱</string>
+    <string name="title_address_label">地址</string>
+    <string name="title_store_address_label_hint">新增位址</string>
+    <string name="title_address_phone_label">電話</string>
+    <string name="title_address_phone_label_hint">新增電話</string>
+    <string name="title_store_service_time">營業時間</string>
+    <string name="title_store_open_time">開始</string>
+    <string name="title_store_close_time">結束</string>
+    <string name="title_mon">星期一</string>
+    <string name="title_tue">星期二</string>
+    <string name="title_wed">星期三</string>
+    <string name="title_thu">星期四</string>
+    <string name="title_fri">星期五</string>
+    <string name="title_sat">星期六</string>
+    <string name="title_sun">星期日</string>
+    <string name="grocery_login_msg_geo_trans">位置轉換中，請稍候...</string>
+
+    <!-- LoginGroceryListFragment error message -->
+    <string name="grocery_login_err_empty_phone">電話欄位尚未輸入</string>
+    <string name="grocery_login_err_empty_store_address">店家地址欄位尚未輸入</string>
+    <string name="grocery_login_err_dialog_msg">暫無相關資料，請稍後再試</string>
+
+    <string-array name="weekTitle">
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+        <item>星期日</item>
+    </string-array>
+
+    <!-- GroceryListFragment -->
+    <string name="title_checkout_total">總額</string>
+    <string name="title_layout_bottom_checkout_total">總額 $ %1$s</string>
+    <string name="title_item_total">項物品</string>
+    <string name="title_popup_modify">修改</string>
+    <string name="title_popup_del">刪除</string>
+    <string name="title_popup_map">位置資訊</string>
+    <string name="title_popup_phone">撥打電話</string>
+
+    <string name="title_grocery_comment_content">%1$s, 價格:%2$s, 數量:%3$s</string>
+    <string name="msg_if_or_not_import_in_expired">是否納入購買品項至過期管理?</string>
+    <string name="msg_err_store_address">位置資訊無法定位</string>
+    <string name="msg_err_store_phone">電話資訊錯誤</string>
+
+
+    <!--GroceryHistoryFragment-->
+    <string name="title_grocery_history_date_interval">設定時間區間</string>
+    <string name="title_grocery_history_line_chart">購物統計(日)</string>
+    <string name="title_grocery_history_line_chart_desc">購物統計</string>
+    <string name="title_grocery_history_detail">購物細目</string>
+    <string name="title_no_chart_data_available">!!!尚未進行資料查詢!!!</string>
+    <string name="title_grocery_detail_list_item_name">品項名稱</string>
+    <string name="title_grocery_detail_list_item_price">單價</string>
+    <string name="title_grocery_detail_list_item_qty">數量</string>
+    <string name="title_grocery_detail_list_item_total_coast">總金額</string>
+    <string name="title_grocery_item_receipt">【%1$s】清單收據</string>
+
+    <string name="msg_error_start_date_not_set">開始日期尚未設定</string>
+    <string name="msg_error_end_date_not_set">結束日期尚未設定</string>
+    <string name="msg_error_end_date_before_start_date">結束日期不能早於開始日期</string>
+
+    <!-- Barcode Dialog -->
+    <string name="title_barcode_dialog">"條碼顯示"</string>
+    <string name="title_no_barcode_msg">無條碼資料 !!!</string>
+
+    <!-- About Dialog -->
+    <string name="title_app_about">關於</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- CropImageDialog -->
+    <string name="title_crop_dialog_title">調整圖片</string>
+    <string name="title_image_chooser_title">選擇圖片</string>
+
+    <!-- DatePickerDialog -->
+    <string name="title_date_picker_dialog_title">選擇日期</string>
+    <string name="title_date_picker_neutral_spinner">Spinner</string>
+    <string name="title_date_picker_neutral_calendar">Calendar</string>
+
+    <!-- TimePickerDialog -->
+    <string name="title_time_picker_dialog_title">設定時間</string>
+
+    <!-- MaterialModifyDialog -->
+    <string name="title_material_modify_dialog_title">修改物品資料</string>
+
+    <!-- ReceiptDialog -->
+    <string name="title_receipt_dialog_title">刪除並成為歷史清單?</string>
+
+    <!-- Crop image activity -->
+    <string name="crop_activity_label">調整圖片</string>
+    <string name="fixedAspectRatio">fixedAspectRatio =</string>
+    <string name="aspectRatioX">\u002010</string>
+    <string name="aspectRatioXHeader">aspectRatioX =</string>
+    <string name="aspectRatioY">\u002010</string>
+    <string name="aspectRatioYHeader">aspectRatioY =</string>
+    <string name="showGuidelines">showGuidelines = </string>
+    <string name="crop">Crop</string>
+    <string name="rotate_right">右旋</string>
+    <string name="rotate_Left">左旋</string>
+
+    <!-- ExpireMonitorRunnable -->
+    <string name="format_expired_msg">%1$s已經過期, 過期時間為%2$s, 請注意物品狀態</string>
+    <string name="format_before_expired_msg">%1$s即將過期, 過期時間為%2$s, 請注意物品狀態</string>
+
+    <!-- GroceryNearbyMonitorRunnable -->
+    <string name="format_dist_meter">%1$s公尺</string>
+    <string name="format_dist_kilometer">%1$s公里</string>
+    <string name="format_nearby_store">鄰近店家[%1$s], 相鄰%2$s</string>
+
+    <!-- MaterialProvider -->
+    <string name="title_db_upgrade_dialog">警告!!!</string>
+    <string name="title_db_upgrade_msg">資料庫版本升級，強烈建議手動進行一次備份!!!否則在資料庫回復過程中會造成不預期錯誤。</string>
+
+    <!-- Barcode Scanner -->
+    <string name="app_picker_name">應用程式</string>
+    <string name="bookmark_picker_name">書籤</string>
+    <string name="button_add_calendar">加入至行事曆</string>
+    <string name="button_add_contact">加入聯絡人</string>
+    <string name="button_book_search">圖書搜尋</string>
+    <string name="button_cancel">取消</string>
+    <string name="button_custom_product_search">自定義搜尋</string>
+    <string name="button_dial">撥號</string>
+    <string name="button_email">發送電子郵件</string>
+    <string name="button_get_directions">規劃路線</string>
+    <string name="button_mms">發送 MMS</string>
+    <string name="button_ok">確定</string>
+    <string name="button_open_browser">開啟瀏覽器</string>
+    <string name="button_product_search">產品搜尋</string>
+    <string name="button_search_book_contents">搜尋圖書內容</string>
+    <string name="button_share_app">應用程式</string>
+    <string name="button_share_bookmark">書籤</string>
+    <string name="button_share_by_email">透過電子郵件分享</string>
+    <string name="button_share_by_sms">透過簡訊分享</string>
+    <string name="button_share_clipboard">剪貼簿</string>
+    <string name="button_share_contact">聯絡人資訊</string>
+    <string name="button_show_map">顯示地圖</string>
+    <string name="button_sms">發送簡訊</string>
+    <string name="button_web_search">網頁搜尋</string>
+    <string name="button_wifi">連接網路</string>
+    <string name="contents_contact">聯絡人資訊</string>
+    <string name="contents_email">電子郵件地址</string>
+    <string name="contents_location">地理座標</string>
+    <string name="contents_phone">電話號碼</string>
+    <string name="contents_sms">簡訊地址</string>
+    <string name="contents_text">純文字</string>
+    <string name="history_clear_one_history_text">清除記錄</string>
+    <string name="history_clear_text">清除</string>
+    <string name="history_email_title">條碼掃描器記錄</string>
+    <string name="history_empty">沒有記錄</string>
+    <string name="history_empty_detail">沒有條碼掃描記錄</string>
+    <string name="history_send">發送記錄</string>
+    <string name="history_title">記錄</string>
+    <string name="menu_encode_mecard">使用 MECARD</string>
+    <string name="menu_encode_vcard">使用 vCard</string>
+    <string name="menu_help">說明</string>
+    <string name="menu_history">記錄</string>
+    <string name="menu_barcode_settings">設定</string>
+    <string name="menu_barcode_share">分享</string>
+    <string name="msg_bulk_mode_scanned">大量掃描模式：條碼掃描並儲存</string>
+    <string name="msg_camera_framework_bug">很抱歉，Android 相機出現問題，您可能需要重新啟動您的裝置。</string>
+    <string name="msg_default_format">格式</string>
+    <string name="msg_default_meta">元資料</string>
+    <string name="msg_default_mms_subject">你好</string>
+    <string name="msg_default_status">將條碼置於鏡頭範圍內以進行掃描。</string>
+    <string name="msg_default_time">時間</string>
+    <string name="msg_default_type">類型</string>
+    <string name="msg_encode_contents_failed">無法讀取條碼。</string>
+    <string name="msg_error">錯誤</string>
+    <string name="msg_google_books">Google</string>
+    <string name="msg_google_product">Google</string>
+    <string name="msg_intent_failed">抱歉，無法打開所需軟體，條碼內容可能不符規格。</string>
+    <string name="msg_invalid_value">輸入值無效</string>
+    <string name="msg_redirect">重定向</string>
+    <string name="msg_sbc_book_not_searchable">無法找到此圖書。</string>
+    <string name="msg_sbc_failed">搜尋時發生錯誤。</string>
+    <string name="msg_sbc_no_page_returned">沒有取得頁面</string>
+    <string name="msg_sbc_page">頁面</string>
+    <string name="msg_sbc_results">結果</string>
+    <string name="msg_sbc_searching_book">搜尋圖書中\u2026</string>
+    <string name="msg_sbc_snippet_unavailable">無法取得摘要</string>
+    <string name="msg_share_explanation">您可以在您的手機螢幕上顯示條碼，並使用其他手機掃描條碼，藉此分享資訊</string>
+    <string name="msg_share_text">或輸入一些文字並按 Enter</string>
+    <string name="msg_sure">您確定嗎？</string>
+    <string name="msg_unmount_usb">無法讀取 SD 卡。</string>
+    <string name="preferences_actions_title">找到條碼時\u2026</string>
+    <string name="preferences_auto_focus_title">使用自動對焦</string>
+    <string name="preferences_auto_open_web_title">自動打開網頁</string>
+    <string name="preferences_bulk_mode_summary">連續掃描並儲存多個條碼</string>
+    <string name="preferences_bulk_mode_title">大量掃描模式</string>
+    <string name="preferences_copy_to_clipboard_title">複製到剪貼簿</string>
+    <string name="preferences_custom_product_search_summary" formatted="false">替換：％s=內容，％f=格式，％t=類型</string>
+    <string name="preferences_custom_product_search_title">自訂搜尋網址</string>
+    <string name="preferences_decode_1D_industrial_title">一維工業條碼</string>
+    <string name="preferences_decode_1D_product_title">一維產品條碼</string>
+    <string name="preferences_decode_Aztec_title">Aztec 條碼</string>
+    <string name="preferences_decode_Data_Matrix_title">Data Matrix 條碼</string>
+    <string name="preferences_decode_PDF417_title">PDF417 條碼（β）</string>
+    <string name="preferences_decode_QR_title">QR Code</string>
+    <string name="preferences_device_bug_workarounds_title">迴避設備問題</string>
+    <string name="preferences_disable_barcode_scene_mode_title">取消條碼場景模式</string>
+    <string name="preferences_disable_continuous_focus_summary">只使用標準對焦模式</string>
+    <string name="preferences_disable_continuous_focus_title">取消連續對焦</string>
+    <string name="preferences_disable_exposure_title">取消曝光</string>
+    <string name="preferences_disable_metering_title">取消測光</string>
+    <string name="preferences_front_light_auto">自動</string>
+    <string name="preferences_front_light_off">關</string>
+    <string name="preferences_front_light_on">開</string>
+    <string name="preferences_front_light_summary">改善在低光源的環境下掃描的成功率，但有可能造成過度曝光的現象</string>
+    <string name="preferences_front_light_title">使用前光源</string>
+    <string name="preferences_general_title">一般設定</string>
+    <string name="preferences_invert_scan_summary">掃描黑底白字的條碼（某些設備上無法使用）</string>
+    <string name="preferences_invert_scan_title">黑底白字掃描</string>
+    <string name="preferences_name">設定</string>
+    <string name="preferences_orientation_title">沒有自動旋轉</string>
+    <string name="preferences_play_beep_title">嗶一聲</string>
+    <string name="preferences_remember_duplicates_summary">在記錄中重複儲存相同的條碼</string>
+    <string name="preferences_remember_duplicates_title">記錄重複的條碼</string>
+    <string name="preferences_result_title">結果設定</string>
+    <string name="preferences_scanning_title">當掃描條碼時，解碼\u2026</string>
+    <string name="preferences_search_country">搜尋國家</string>
+    <string name="preferences_supplemental_summary">嘗試透過條碼搜尋更多的資訊</string>
+    <string name="preferences_supplemental_title">搜尋更多資訊</string>
+    <string name="preferences_vibrate_title">震動</string>
+    <string name="result_address_book">找到聯絡人資訊</string>
+    <string name="result_calendar">找到行事曆事件</string>
+    <string name="result_email_address">找到電子郵件地址</string>
+    <string name="result_geo">找到座標</string>
+    <string name="result_isbn">找到圖書</string>
+    <string name="result_product">找到產品</string>
+    <string name="result_sms">找到簡訊</string>
+    <string name="result_tel">找到電話號碼</string>
+    <string name="result_text">找到文字</string>
+    <string name="result_uri">找到 URL</string>
+    <string name="result_wifi">找到無線區網設定</string>
+    <string name="sbc_name">Google 圖書搜尋</string>
+    <string name="wifi_changing_network">網路連接中\u2026</string>
+
+    <!-- AboutDialog -->
+    <string name="about_info"><![CDATA[<h3>過期物品管家<br/>Version %1$s</h3>這是一個能幫助你/妳管理物品<br/>有效期限與狀態的APP<br/><b>http://tinyurl.com/my9bw3e</b><br/><br/>]]></string>
+    <string name="about_legal"><![CDATA[<b>yianday0330@gmail.com</b><h1>Powered by Y & A</h1>]]></string>
+
+</resources>

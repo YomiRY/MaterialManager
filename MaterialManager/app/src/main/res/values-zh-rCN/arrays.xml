@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ Copyright (C) 2008 ZXing authors
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -->
+<resources>
+    <string-array name="country_codes">
+        <item>-</item>
+        <item>AR</item>
+        <item>AU</item>
+        <item>BR</item>
+        <item>BG</item>
+        <item>CA</item>
+        <item>CH</item>
+        <item>CN</item>
+        <item>CZ</item>
+        <item>DE</item>
+        <item>DK</item>
+        <item>ES</item>
+        <item>FI</item>
+        <item>FR</item>
+        <item>GB</item>
+        <item>GR</item>
+        <item>HU</item>
+        <item>ID</item>
+        <item>IT</item>
+        <item>JP</item>
+        <item>KR</item>
+        <item>NL</item>
+        <item>PL</item>
+        <item>PT</item>
+        <item>RO</item>
+        <item>RU</item>
+        <item>SE</item>
+        <item>SK</item>
+        <item>SI</item>
+        <item>TR</item>
+        <item>TW</item>
+        <item>US</item>
+    </string-array>
+    <string-array name="preferences_front_light_values">
+        <item>ON</item>
+        <item>AUTO</item>
+        <item>OFF</item>
+    </string-array>
+    <string-array name="preferences_front_light_options">
+        <item>@string/preferences_front_light_on</item>
+        <item>@string/preferences_front_light_auto</item>
+        <item>@string/preferences_front_light_off</item>
+    </string-array>
+    <string-array name="priority_array">
+        <item>高優先權</item>
+        <item>中優先權</item>
+        <item>低優先權</item>
+        <item>無優先權</item>
+    </string-array>
+    <string-array name="coupon_type_array">
+        <item>Basic Indicator</item>
+        <item>Percent (like 25%)</item>
+        <item>Fixed Amt (like $2.00)</item>
+        <item>Discount Per Unit ($1.50)</item>
+        <item>Sale Price</item>
+        <item>Buy 1 get x free</item>
+    </string-array>
+
+    <!--SettingsFragment-->
+
+    <!-- Notification frequency unit after the material is expired : hr. -->
+    <string-array name="default_notification_frequency">
+        <item>1</item>
+        <item>3</item>
+        <item>5</item>
+        <item>7</item>
+    </string-array>
+
+    <string-array name="font_size_scale_level_title">
+        <item>大型</item>
+        <item>中型</item>
+        <item>一般大小</item>
+    </string-array>
+
+    <string-array name="font_size_scale_level">
+        <item>1.4</item>
+        <item>1.2</item>
+        <item>1.0</item>
+    </string-array>
+</resources>

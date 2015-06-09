@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/txv_menu_title_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="6dip"
+        android:gravity="center_vertical"
+        android:paddingBottom="12dip"
+        android:paddingTop="12dip"
+        android:textAllCaps="true"
+        android:textColor="#f7f7f7"
+        android:textStyle="bold" />
+
+</RelativeLayout>

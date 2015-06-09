@@ -1,0 +1,813 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_grocery_login"
+    android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/ll_grocery_list_settings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_iron_ring" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="15dip"
+                    android:paddingLeft="15dip"
+                    android:paddingTop="15dip">
+                    <TextView
+                        android:id="@+id/tv_grocery_list_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/title_grocery_name"
+                        android:textColor="@color/GK"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/textview_text_size"/>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/act_grocery_list_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/tv_grocery_list_name"
+                        android:completionThreshold="1"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textSize="@dimen/textview_text_size"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="15dip"
+                    android:paddingLeft="15dip">
+                    <RelativeLayout
+                        android:id="@+id/rl_pick_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_store_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_action_location" />
+
+                        <TextView
+                            android:id="@+id/tv_pick_address_hint"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/iv_store_address"
+                            android:text="@string/title_store_address_hint"
+                            android:textColor="@color/GK"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/textview_text_size"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@id/rl_pick_address">
+                        <TextView
+                            android:id="@+id/tv_alert_nearby_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="17dp"
+                            android:text="@string/title_nearby_alert"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/textview_text_size"/>
+
+                        <CheckBox
+                            android:id="@+id/cb_nearby_alert_enable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/tv_alert_nearby_title"
+                            android:checked="false" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/light_shadow" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dp"
+                android:layout_marginTop="16.0dip"
+                android:background="#ffffffff"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_iron_ring" />
+
+                <LinearLayout
+                    android:id="@+id/ll_locationDetailsLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="16.0dip"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/ll_store_name_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tv_store_name_label"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16.0dip"
+                            android:layout_marginRight="16.0dip"
+                            android:text="@string/title_store_name_label"
+                            android:textColor="#ff89a923"
+                            android:textSize="@dimen/textview_text_size"
+                            android:textStyle="bold" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/act_store_name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="48dip"
+                            android:layout_marginLeft="16.0dip"
+                            android:layout_marginRight="16.0dip"
+                            android:clickable="true"
+                            android:gravity="center_vertical"
+                            android:hint="@string/title_store_name_label_hint"
+                            android:text=""
+                            android:textColor="#ff000000"
+                            android:textSize="@dimen/textview_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/addressLayout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tv_addressLabel"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16.0dip"
+                            android:layout_marginRight="16.0dip"
+                            android:text="@string/title_address_label"
+                            android:textColor="#ff89a923"
+                            android:textSize="@dimen/textview_text_size"
+                            android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="3.0dip"
+                            android:layout_marginTop="3.0dip"
+                            android:orientation="horizontal">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/act_addressText"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="16.0dip"
+                                android:layout_marginRight="16.0dip"
+                                android:layout_weight="1.0"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:hint="@string/title_store_address_label_hint"
+                                android:text=""
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <ImageView
+                                android:id="@+id/iv_navigateButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="48.0dip"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginRight="16.0dip"
+                                android:layout_weight="0.0"
+                                android:gravity="center_vertical"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_action_navigate_green" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_phoneLayout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tv_phoneLabel"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16.0dip"
+                            android:layout_marginRight="16.0dip"
+                            android:text="@string/title_address_phone_label"
+                            android:textColor="#ff89a923"
+                            android:textSize="@dimen/textview_text_size"
+                            android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="48.0dip"
+                            android:orientation="horizontal">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/act_phoneText"
+                                android:layout_width="fill_parent"
+                                android:layout_height="48.0dip"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="16.0dip"
+                                android:layout_marginRight="16.0dip"
+                                android:layout_weight="1.0"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:hint="@string/title_address_phone_label_hint"
+                                android:inputType="phone"
+                                android:text=""
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <ImageView
+                                android:id="@+id/iv_phoneButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="48.0dip"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginRight="16.0dip"
+                                android:layout_weight="0.0"
+                                android:gravity="center_vertical"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_action_phone_start"
+                                android:text="140/150"
+                                android:textColor="#ffffffff"
+                                android:textSize="@dimen/textview_text_size"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_timingsDetailsLayout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="42.0dip"
+                            android:layout_marginLeft="16.0dip"
+                            android:layout_marginRight="16.0dip"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_timingsLabel"
+                                android:layout_width="90.0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="left|center"
+                                android:gravity="left|center"
+                                android:text="@string/title_store_service_time"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/textview_text_size"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_opensAt"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:gravity="center"
+                                android:text="@string/title_store_open_time"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/textview_text_size"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="5.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="3.0dip"
+                                android:layout_marginRight="3.0dip"
+                                android:layout_weight="0.0"
+                                android:gravity="center"
+                                android:text="-"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_closesBy"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:gravity="center"
+                                android:text="@string/title_store_close_time"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/textview_text_size"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_monLayout"
+                            android:layout_width="fill_parent"
+                            android:layout_height="42.0dip"
+                            android:layout_marginLeft="16.0dip"
+                            android:layout_marginRight="16.0dip"
+                            android:layout_marginTop="14.0dip"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tv_monLabel"
+                                android:layout_width="90.0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="left|center"
+                                android:gravity="left|center"
+                                android:text="@string/title_mon"
+                                android:textColor="#ff89a923"
+                                android:textSize="@dimen/textview_text_size"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:id="@+id/btn_monTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <TextView
+                                android:layout_width="5.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="3.0dip"
+                                android:layout_marginRight="3.0dip"
+                                android:layout_weight="0.0"
+                                android:gravity="center"
+                                android:text="-"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <Button
+                                android:id="@+id/btn_monPMTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_tueLayout"
+                            android:layout_width="fill_parent"
+                            android:layout_height="42.0dip"
+                            android:layout_marginTop="14.0dip"
+                            android:layout_marginLeft="16.0dip"
+                            android:layout_marginRight="16.0dip"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tv_tueLabel"
+                                android:layout_width="90.0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="left|center"
+                                android:gravity="left|center"
+                                android:text="@string/title_tue"
+                                android:textColor="#ff89a923"
+                                android:textSize="@dimen/textview_text_size"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:id="@+id/btn_tueTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <TextView
+                                android:layout_width="5.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="3.0dip"
+                                android:layout_marginRight="3.0dip"
+                                android:layout_weight="0.0"
+                                android:gravity="center"
+                                android:text="-"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <Button
+                                android:id="@+id/btn_tuePMTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_wedLayout"
+                            android:layout_width="fill_parent"
+                            android:layout_height="42.0dip"
+                            android:layout_marginTop="14.0dip"
+                            android:layout_marginLeft="16.0dip"
+                            android:layout_marginRight="16.0dip"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tv_wedLabel"
+                                android:layout_width="90.0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="left|center"
+                                android:gravity="left|center"
+                                android:text="@string/title_wed"
+                                android:textColor="#ff89a923"
+                                android:textSize="@dimen/textview_text_size"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:id="@+id/btn_wedTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <TextView
+                                android:layout_width="5.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="3.0dip"
+                                android:layout_marginRight="3.0dip"
+                                android:layout_weight="0.0"
+                                android:gravity="center"
+                                android:text="-"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <Button
+                                android:id="@+id/btn_wedPMTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_thuLayout"
+                            android:layout_width="fill_parent"
+                            android:layout_height="42.0dip"
+                            android:layout_marginTop="14.0dip"
+                            android:layout_marginLeft="16.0dip"
+                            android:layout_marginRight="16.0dip"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tv_thuLabel"
+                                android:layout_width="90.0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="left|center"
+                                android:gravity="left|center"
+                                android:text="@string/title_thu"
+                                android:textColor="#ff89a923"
+                                android:textSize="@dimen/textview_text_size"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:id="@+id/btn_thuTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <TextView
+                                android:layout_width="5.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="3.0dip"
+                                android:layout_marginRight="3.0dip"
+                                android:layout_weight="0.0"
+                                android:gravity="center"
+                                android:text="-"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <Button
+                                android:id="@+id/btn_thuPMTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_friLayout"
+                            android:layout_width="fill_parent"
+                            android:layout_height="42.0dip"
+                            android:layout_marginTop="14.0dip"
+                            android:layout_marginLeft="16.0dip"
+                            android:layout_marginRight="16.0dip"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tv_friLabel"
+                                android:layout_width="90.0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="left|center"
+                                android:gravity="left|center"
+                                android:text="@string/title_fri"
+                                android:textColor="#ff89a923"
+                                android:textSize="@dimen/textview_text_size"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:id="@+id/btn_friTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <TextView
+                                android:layout_width="5.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="3.0dip"
+                                android:layout_marginRight="3.0dip"
+                                android:layout_weight="0.0"
+                                android:gravity="center"
+                                android:text="-"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <Button
+                                android:id="@+id/btn_friPMTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_satLayout"
+                            android:layout_width="fill_parent"
+                            android:layout_height="42.0dip"
+                            android:layout_marginTop="14.0dip"
+                            android:layout_marginLeft="16.0dip"
+                            android:layout_marginRight="16.0dip"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tv_satLabel"
+                                android:layout_width="90.0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="left|center"
+                                android:gravity="left|center"
+                                android:text="@string/title_sat"
+                                android:textColor="#ff89a923"
+                                android:textSize="@dimen/textview_text_size"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:id="@+id/btn_satTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <TextView
+                                android:layout_width="5.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="3.0dip"
+                                android:layout_marginRight="3.0dip"
+                                android:layout_weight="0.0"
+                                android:gravity="center"
+                                android:text="-"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <Button
+                                android:id="@+id/btn_satPMTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_sunLayout"
+                            android:layout_width="fill_parent"
+                            android:layout_height="42.0dip"
+                            android:layout_marginTop="14.0dip"
+                            android:layout_marginLeft="16.0dip"
+                            android:layout_marginRight="16.0dip"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tv_sunLabel"
+                                android:layout_width="90.0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="left|center"
+                                android:gravity="left|center"
+                                android:text="@string/title_sun"
+                                android:textColor="#ff89a923"
+                                android:textSize="@dimen/textview_text_size"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:id="@+id/btn_sunTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <TextView
+                                android:layout_width="5.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="3.0dip"
+                                android:layout_marginRight="3.0dip"
+                                android:layout_weight="0.0"
+                                android:gravity="center"
+                                android:text="-"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+
+                            <Button
+                                android:id="@+id/btn_sunPMTimings"
+                                android:layout_width="0.0dip"
+                                android:layout_height="36.0dip"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="2.0dip"
+                                android:layout_marginTop="2.0dip"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/gray_rounded_button_shape"
+                                android:gravity="center"
+                                android:text="@string/title_service_time_default"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/textview_text_size" />
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/v_bottomSpacing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="16.0dip" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:background="@color/grey_devider"/>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="10.0dip"-->
+                    <!--android:layout_marginRight="10.0dp"-->
+                    <!--android:layout_marginTop="16.0dip"-->
+                    <!--android:background="#ffffffff"-->
+                    <!--android:orientation="horizontal">-->
+                    <!--<Button-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginBottom="10dp"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:background="@drawable/selector_normal_button_state"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:text="@string/title_btn_save"-->
+                        <!--android:textStyle="bold"/>-->
+
+                    <!--<Button-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginBottom="10dp"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:background="@drawable/selector_normal_button_state"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:text="@string/title_btn_cancel"-->
+                        <!--android:textStyle="bold"/>-->
+                <!--</LinearLayout>-->
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/light_shadow" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

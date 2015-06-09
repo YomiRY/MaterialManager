@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_shopTabLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffffff">
+
+    <RelativeLayout
+        android:id="@+id/rl_search_store_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="0.0px"
+            android:layout_height="0.0px"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+        <LinearLayout
+            android:id="@+id/ll_searchlayout"
+            android:layout_width="fill_parent"
+            android:layout_height="48.0dip"
+            android:layout_marginTop="10.0dip"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8.0dip"
+                android:layout_marginRight="7.0dip"
+                android:layout_weight="1.0"
+                android:gravity="center_vertical"
+                android:hint="@string/title_search_store_hint"
+                android:singleLine="true"
+                android:textSize="@dimen/textview_text_size" />
+
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="48.0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="8.0dip"
+                android:layout_weight="0.0"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_action_search_green"
+                android:drawablePadding="8.0dip"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="#ff000000"
+                android:textSize="14.0sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_search_dist_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_searchlayout"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="16.0dip"
+            android:layout_marginRight="16.0dip"
+            android:text="@string/title_nearby_dist"
+            android:textColor="#ff89a923"
+            android:textSize="@dimen/textview_text_size"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/rl_adjust_nearby_dist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/tv_search_dist_title">
+            <SeekBar
+                android:id="@+id/sb_nearby_dist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toLeftOf="@+id/tv_nearby_dist_text"
+                android:max="5"
+                android:progress="0"/>
+
+            <TextView
+                android:id="@+id/tv_nearby_dist_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/tv_dist_unit"
+                android:layout_marginRight="5dp"
+                android:layout_centerVertical="true"
+                android:text="5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textview_text_size"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_dist_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_centerVertical="true"
+                android:text="@string/title_nearby_dist_info"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textview_text_size"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_search_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_adjust_nearby_dist"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="16.0dip"
+            android:layout_marginRight="16.0dip"
+            android:text="@string/title_nearby_search"
+            android:textColor="#ff89a923"
+            android:textSize="@dimen/textview_text_size"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/lv_nearby_store"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/tv_search_title"
+            android:layout_marginBottom="10.0dip"
+            android:layout_marginTop="10.0dip"
+            android:cacheColorHint="#00000000"
+            android:divider="@drawable/divider_up_medium"
+            android:dividerHeight="0.5sp"
+            android:drawSelectorOnTop="false"
+            android:fadingEdge="vertical"
+            android:gravity="center_vertical"
+            android:scrollbars="none"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/rl_on_loading"
+        layout="@layout/view_listview_empty_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp"
+        android:visibility="visible" />
+
+    <include
+        android:id="@+id/rl_empty_data"
+        layout="@layout/no_data_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:textSize="20dip"
+        android:visibility="gone"/>
+
+    <FrameLayout
+        android:id="@+id/fl_store_map_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"></FrameLayout>
+
+    <ImageView
+        android:id="@+id/iv_toggleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/dashboard_button_map" />
+</RelativeLayout>

@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="?android:attr/selectableItemBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        <RelativeLayout
+            android:id="@+id/rl_group_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/trans_white"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp">
+            <TextView
+                android:id="@+id/tv_group_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_group_layout"
+            android:paddingBottom="15dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp">
+            <include
+                android:id="@+id/ll_material_content_layout"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                layout="@layout/view_material_global_search"/>
+
+            <include
+                android:id="@+id/ll_grocery_content_layout"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:visibility="visible"
+                layout="@layout/view_grocery_global_search"/>
+
+            <ImageView
+                android:id="@+id/iv_indicator"
+                android:layout_width="8dp"
+                android:layout_height="12dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/shortcutpage_list_tag" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/v_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/rl_content_layout"
+            android:background="@color/trans_white" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,412 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_grocery_login"
+    android:fillViewport="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/bg_grocery_login"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/ic_iron_ring" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="15dp"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="170.0dip"
+                    android:layout_height="170.0dip"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/iv_add_photo"
+                        android:layout_width="170.0dip"
+                        android:layout_height="170.0dip"
+                        android:adjustViewBounds="true"
+                        android:clickable="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/selector_add_photo_status" />
+
+                    <ImageView
+                        android:layout_width="170.0dip"
+                        android:layout_height="170.0dip"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bg_add_photo_shadow"
+                        android:visibility="visible" />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_title_barcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_barcode"
+                android:textColor="@color/GK"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_size_medium"/>
+
+            <TextView
+                android:id="@+id/tv_barcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/tv_title_barcode"
+                android:clickable="true"
+                android:drawableTop="@drawable/selector_barcode"
+                android:gravity="center"
+                android:text="x xxxxxx xxxxxx x"
+                android:textColor="@color/content_text_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_size_medium" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_material_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_material_name"
+                android:textColor="@color/GK"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_size_medium"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/act_material_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_material_name"
+                android:completionThreshold="1"
+                android:ems="10"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="@dimen/font_size_medium"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_material_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_material_category"
+                android:textColor="@color/GK"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_size_medium"/>
+
+            <Spinner
+                android:id="@+id/spin_material_category"
+                style="@style/SpinnerAppTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_material_category"
+                android:popupBackground="@color/spinner_background" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_purchace_date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_purchace_date"
+                android:textColor="@color/GK"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_size_medium"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_purchace_date_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:clickable="true"
+                android:layout_toRightOf="@+id/tv_purchace_date_title">
+                <TextView
+                    android:id="@+id/tv_purchace_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:text="yyyy/mm/dd"
+                    android:textColor="@color/content_text_color"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/font_size_medium"/>
+
+                <!--android:layout_alignRight="@id/tv_purchace_date"-->
+                <!--android:layout_alignLeft="@id/tv_purchace_date"-->
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_purchace_date"
+                    android:src="@drawable/spinner_background_holo_light"
+                    android:scaleType="fitXY"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_valid_date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_valid_date"
+                android:textColor="@color/GK"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_size_medium"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_validate_date_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:clickable="true"
+                android:layout_toRightOf="@+id/tv_valid_date_title">
+                <TextView
+                    android:id="@+id/tv_valid_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="7dp"
+                    android:gravity="center"
+                    android:text="yyyy/mm/dd"
+                    android:textColor="@color/content_text_color"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/font_size_medium"/>
+
+                <!--android:layout_alignLeft="@id/tv_valid_date"-->
+                <!--android:layout_alignRight="@id/tv_valid_date"-->
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_valid_date"
+                    android:src="@drawable/spinner_background_holo_light"
+                    android:scaleType="fitXY"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_notification_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_notification"
+                android:textColor="@color/GK"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_size_medium"/>
+            <!-- only for number input -->
+
+            <EditText
+                android:id="@+id/et_notification_days"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_notification_days"
+                android:digits="0123456789"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:maxLines="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/et_notification_days"
+                android:paddingTop="10dp"
+                android:text="@string/title_tv_notification_days"
+                android:textColor="@color/title_text_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_size_medium"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_material_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_material_place"
+                android:textColor="@color/GK"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_size_medium"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/act_material_place"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_material_place"
+                android:completionThreshold="1"
+                android:ems="10"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="@dimen/font_size_medium"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_comment"
+                android:textColor="@color/GK"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_size_medium"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/act_comment"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_comment"
+                android:completionThreshold="1"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:textSize="@dimen/font_size_medium"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/light_shadow" />
+
+        <!--<View-->
+            <!--android:id="@+id/v_bottomSpacing"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="16.0dip"-->
+            <!--android:layout_marginLeft="3dp"-->
+            <!--android:layout_marginRight="3dp"-->
+            <!--android:background="@color/white"/>-->
+    </LinearLayout>
+</ScrollView>

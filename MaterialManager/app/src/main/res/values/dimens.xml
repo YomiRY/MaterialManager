@@ -1,0 +1,43 @@
+<resources>
+
+    <!-- Font size -->
+    <dimen name="font_size_small">10sp</dimen>
+    <dimen name="font_size_normal">12sp</dimen>
+    <dimen name="font_size_medium">14sp</dimen>
+    <dimen name="font_size_large">16sp</dimen>
+    <dimen name="font_size_xlarge">18sp</dimen>
+
+    <!-- MaterialManagerFragment -->
+    <dimen name="font_size_material_rest_day">35sp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- crop image activity -->
+    <dimen name="textSize">22sp</dimen>
+    
+    <!-- barcode scanner -->
+    <dimen name="standard_padding">8dip</dimen>
+    <dimen name="half_padding">4dip</dimen>
+
+    <!--AlertDialog-->
+    <dimen name="alert_dialog_text_size">16sp</dimen>
+
+    <!--AboutDialog-->
+    <dimen name="dialog_about_width_size">480dp</dimen>
+
+    <!--Slide Menu-->
+    <dimen name="slidingmenu_offset">80dp</dimen>
+    <dimen name="list_padding">10dp</dimen>
+    <dimen name="shadow_width">15dp</dimen>
+    <integer name="num_cols">1</integer>
+
+
+    <!--GroceryListFragment-->
+    <dimen name="grocery_list_item_height_size">70dp</dimen>
+
+    <!--GroceryHistoryFragment-->
+    <integer name="grocery_history_no_date_searched_size">50</integer>
+
+</resources>

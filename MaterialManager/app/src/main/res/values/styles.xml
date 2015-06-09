@@ -1,0 +1,208 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+
+        -->
+    </style>
+
+    <!-- App theme. Change option menu's background color -->
+    <style name="AppTheme" parent="AppBaseTheme">
+    </style>
+
+    <!--
+    <style name="MaterialManagerPopMenuStyle">
+        <item name="android:popupBackground">@drawable/bg_menu_normal</item>
+        <item name="android:background">@drawable/bg_menu_normal</item>
+    </style>
+
+    -->
+
+    <!--LoginGroceryItemActivity-->
+    <style name="SpinnerAppTheme" parent="@android:style/Widget.Spinner">
+        <item name="android:background">@drawable/spinner_background_holo_light</item>
+    </style>
+    <style name="SpinnerAppTheme.DropDown" parent="@style/SpinnerAppTheme">
+        <item name="android:spinnerMode">dropdown</item>
+    </style>
+    <style name="EditTextAppTheme" parent="@android:style/Widget.EditText">
+        <item name="android:background">@drawable/edit_text_holo_light</item>
+    </style>
+    <style name="CheckBoxAppTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/btn_check_holo_light</item>
+    </style>
+
+    <!--SettingFragment-->
+    <style name="setting_fragment_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:background">@drawable/bg_title_bar</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:textColor">@color/title_text_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- pop up alert dialog window -->
+    <style name="AlertDialogTheme" parent="android:Theme.Dialog">
+        <item name="android:alertDialogStyle">@style/AlertDialog</item>
+        <item name="android:textAppearanceMedium">@style/TextAppearance.Sphinx.Medium</item>
+    </style>
+
+    <style name="TextAppearance.Sphinx.Medium" parent="@android:style/TextAppearance.Holo.Medium">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/alert_dialog_text_size</item>
+    </style>
+
+    <style name="AlertDialog">
+        <item name="android:fullBright">@android:color/transparent</item>
+        <item name="android:fullDark">@android:color/transparent</item>
+        <item name="android:topBright">@color/black</item>
+        <item name="android:topDark">@color/black</item>
+        <item name="android:centerBright">@color/white</item>
+        <item name="android:centerDark">@color/white</item>
+        <item name="android:centerMedium">@color/white</item>
+        <item name="android:bottomBright">@color/white</item>
+        <item name="android:bottomDark">@color/white</item>
+        <item name="android:bottomMedium">@color/white</item>
+    </style>
+
+    <!-- Pinterest test layout-->
+    <style name="dropshadow_down">
+        <item name="android:background">@drawable/global_shadow_down</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">8.0dip</item>
+        <item name="android:layout_marginBottom">-8.0dip</item>
+    </style>
+
+    <style name="section_item_divider">
+        <item name="android:background">@color/light_gray</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1.0px</item>
+    </style>
+
+    <style name="section_item">
+        <item name="android:textSize">14.0dip</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#af000000</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/touch_clear_bg</item>
+        <item name="android:padding">16.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">60.0dip</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="section_item_checkbox" parent="@style/section_item">
+        <item name="android:padding">16.0dip</item>
+        <item name="android:checkMark">@drawable/checkbox_selector</item>
+    </style>
+
+    <style name="section_item_radiobutton" parent="@style/section_item">
+        <item name="android:padding">16.0dip</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawableRight">@drawable/radio_button_selector</item>
+    </style>
+
+    <style name="profile_about_section_title">
+        <item name="android:textSize">11.0dip</item>
+        <item name="android:textColor">#3f000000</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">12.0dip</item>
+        <item name="android:layout_marginTop">10.0dip</item>
+        <item name="android:layout_marginBottom">8.0dip</item>
+    </style>
+
+    <style name="profile_about_section_middle" parent="@style/profile_about_section_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginLeft">16.0dip</item>
+        <item name="android:layout_marginTop">4.0dip</item>
+        <item name="android:layout_marginRight">16.0dip</item>
+        <item name="android:layout_marginBottom">4.0dip</item>
+    </style>
+
+    <style name="section_item_label" parent="@style/section_item">
+        <item name="android:background">@null</item>
+        <item name="android:padding">16.0dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="section_item_meta" parent="@style/section_item_label">
+        <item name="android:textColor">#3f000000</item>
+        <item name="android:paddingRight">10.0dip</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <!-- crop activity layout's theme -->
+    <!-- Robo Theme. -->
+    <style name="RoboTheme">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">@dimen/textSize</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <!-- Quick Action -->
+    <style name="Animations" />
+
+    <!-- PopDownMenu -->
+    <style name="Animations.PopDownMenu" />
+
+    <style name="Animations.PopDownMenu.Left">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_topleft_to_bottomright</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_bottomright_to_topleft</item>
+    </style>
+
+    <style name="Animations.PopDownMenu.Right">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_topright_to_bottomleft</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_bottomleft_to_topright</item>
+    </style>
+
+    <style name="Animations.PopDownMenu.Center">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_top</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_bottom</item>
+    </style>
+
+    <!-- PopUpMenu -->
+    <style name="Animations.PopUpMenu" />
+
+    <style name="Animations.PopUpMenu.Left">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_bottomleft_to_topright</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_topright_to_bottomleft</item>
+    </style>
+
+    <style name="Animations.PopUpMenu.Right">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_topleft_to_bottomright</item>
+    </style>
+
+    <style name="Animations.PopUpMenu.Center">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
+    </style>
+
+    <!-- Barcode Scanner -->
+    <style name="ResultButton" parent="@android:style/Widget.Holo.Button.Borderless.Small">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="ShareButton" parent="@android:style/Widget.Holo.Button.Borderless.Small">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+</resources>

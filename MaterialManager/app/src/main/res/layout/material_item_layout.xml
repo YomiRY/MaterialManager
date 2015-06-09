@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="3dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="4.0">
+
+            <LinearLayout
+                android:layout_width="0.0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_material_pic"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop" />
+
+                    <include
+                        layout="@layout/view_empty_loading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0.0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="2.0"
+                android:background="@drawable/selector_material_item_background"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_material_item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:paddingLeft="5.0dip"
+                    android:paddingRight="5.0dip"
+                    android:singleLine="true"
+                    android:text="Material Name"
+                    android:textColor="@color/material_item_name"
+                    android:textSize="@dimen/font_size_medium"
+                    android:textStyle="bold"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:id="@+id/tv_material_barcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_barcode_indicator"
+                    android:gravity="center"
+                    android:paddingLeft="5.0dip"
+                    android:text="@string/format_material_barcode"
+                    android:textColor="@color/GK"
+                    android:textSize="@dimen/font_size_medium"
+                    android:textStyle="bold"
+                    android:typeface="normal" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_title_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5.0dip"
+                        android:text="@string/format_material_type"
+                        android:textColor="@color/GK"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_material_item_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_title_type"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:paddingLeft="5.0dip"
+                        android:singleLine="true"
+                        android:text="Material Type"
+                        android:textColor="@color/content_text_color"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_title_purchace_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5.0dip"
+                        android:text="@string/format_purchace_date"
+                        android:textColor="@color/GK"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_material_purchace_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_title_purchace_date"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:paddingLeft="5.0dip"
+                        android:singleLine="true"
+                        android:text="Purchace Date"
+                        android:textColor="@color/content_text_color"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_title_valid_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5.0dip"
+                        android:text="@string/format_valid_date"
+                        android:textColor="@color/GK"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_material_valid_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_title_valid_date"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:paddingLeft="5.0dip"
+                        android:singleLine="true"
+                        android:text="Valid Date"
+                        android:textColor="@color/content_text_color"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_title_place"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5.0dip"
+                        android:text="@string/format_material_place"
+                        android:textColor="@color/GK"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_material_place"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_title_place"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:paddingLeft="5.0dip"
+                        android:singleLine="true"
+                        android:text="Material Location"
+                        android:textColor="@color/content_text_color"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_title_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5.0dip"
+                        android:text="@string/format_comment"
+                        android:textColor="@color/GK"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_material_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_title_comment"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:paddingLeft="5.0dip"
+                        android:singleLine="true"
+                        android:text="Comment"
+                        android:textColor="@color/content_text_color"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0.0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rl_rest_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey_layout">
+
+                    <TextView
+                        android:id="@+id/tv_valid_date_no_set_up"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:ellipsize="marquee"
+                        android:gravity="center"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:padding="5.0dip"
+                        android:singleLine="true"
+                        android:text="@string/msg_valid_date_no_set_up"
+                        android:textColor="@color/title_text_color"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_material_expired"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:ellipsize="marquee"
+                        android:gravity="center"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:padding="5.0dip"
+                        android:singleLine="true"
+                        android:text="@string/msg_expired"
+                        android:textColor="@color/title_text_color"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical"
+                        android:padding="5.0dip"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/tv_rest_days"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="-5.0dip"
+                            android:layout_marginTop="-5.0dip"
+                            android:ellipsize="marquee"
+                            android:gravity="center_horizontal"
+                            android:includeFontPadding="false"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:singleLine="true"
+                            android:tag="font_size_change_ignore"
+                            android:text="3"
+                            android:textColor="@color/brown_text"
+                            android:textSize="@dimen/font_size_material_rest_day"
+                            android:textStyle="bold"
+                            android:typeface="normal" />
+
+                        <TextView
+                            android:id="@+id/tv_unit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:gravity="center_horizontal"
+                            android:includeFontPadding="false"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:singleLine="true"
+                            android:text="@string/exp_unit"
+                            android:textColor="@color/brown_text"
+                            android:textSize="@dimen/font_size_medium"
+                            android:textStyle="bold"
+                            android:typeface="normal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_reminder_label"
+                        android:layout_width="5.0dip"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@color/light_brown_label"
+                        android:orientation="vertical" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="@color/grey_devider" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_expanded_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:contentDescription=""/>
+</RelativeLayout>

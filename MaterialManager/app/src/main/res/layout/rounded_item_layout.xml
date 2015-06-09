@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dip"
+    android:background="@color/bg_grocery_login">
+    <RelativeLayout
+        android:id="@+id/rl_material_type_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.material.management.component.RoundedImageView
+            android:id="@+id/iv_rounded_view_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:padding="0dip"
+            android:scaleType="centerCrop"
+            app:border_color="@color/selector_border"
+            app:border_width="0dip"
+            app:corner_radius="0dip"/>
+
+        <TextView
+            android:id="@+id/tv_rounded_text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_rounded_view_pic"
+            android:layout_alignLeft="@id/iv_rounded_view_pic"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:background="#7ff29b25"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textSize="@dimen/font_size_medium"
+            android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+
+        <TextView
+            android:id="@+id/tv_rounded_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_rounded_text3"
+            android:layout_alignLeft="@id/tv_rounded_text3"
+            android:layout_marginBottom="4dp"
+            android:background="#7f1dc9af"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textSize="@dimen/font_size_medium"
+            android:textAppearance="?android:attr/textAppearanceMediumInverse" />
+
+        <TextView
+            android:id="@+id/tv_rounded_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_rounded_text2"
+            android:layout_alignLeft="@id/tv_rounded_text2"
+            android:layout_marginBottom="4dp"
+            android:background="#7feeafa0"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textSize="@dimen/font_size_medium"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp">
+        <ImageView
+            android:id="@+id/iv_expired_ref"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/bg_expired_ref" />
+
+        <TextView
+            android:id="@+id/tv_material_expired_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/iv_expired_ref"
+            android:layout_alignRight="@id/iv_expired_ref"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:textSize="@dimen/font_size_medium"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="6"
+            android:tag="font_size_change_ignore"/>
+
+        <TextView
+            android:id="@+id/tv_material_unexpired_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/iv_expired_ref"
+            android:layout_alignRight="@id/iv_expired_ref"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:tag="font_size_change_ignore"
+            android:textSize="@dimen/font_size_medium"
+            android:text="6"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        layout="@layout/view_empty_loading">
+    </include>
+</RelativeLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+    <ImageView
+        android:id="@+id/iv_menu_sub_item_img"
+        android:layout_width="@dimen/slide_menu_subitem_icon_width_size"
+        android:layout_height="@dimen/slide_menu_subitem_icon_height_size"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/gear_48" />
+
+    <TextView
+        android:id="@+id/tv_menu_sub_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="6dp"
+        android:layout_toRightOf="@+id/iv_menu_sub_item_img"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="@dimen/slide_menu_subitem_text_size"/>
+</RelativeLayout>

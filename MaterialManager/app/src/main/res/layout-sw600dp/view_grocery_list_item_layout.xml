@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_grocery_head_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grocery_list_item_height_size">
+
+        <ImageView
+            android:id="@+id/iv_spinner_menu"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:src="@drawable/abs_spinner_ab_holo_dark" />
+
+        <View
+            android:id="@+id/v_vertical_bar"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/iv_spinner_menu"
+            android:background="#CDC9C9" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/v_vertical_bar">
+
+            <TextView
+                android:id="@+id/tv_grocery_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="grocery name(1/1)"
+                android:textColor="@color/black"
+                android:textSize="@dimen/grocery_list_name_size" />
+
+            <RelativeLayout
+                android:id="@+id/ll_store_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@id/tv_grocery_name">
+                <TextView
+                    android:id="@+id/tv_store_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@+id/iv_store_service_status"
+                    android:layout_marginRight="20dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="store name"
+                    android:textColor="@color/light_brown_label"
+                    android:textSize="@dimen/grocery_list_store_name_size"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/iv_store_service_status"
+                    android:layout_width="45dp"
+                    android:layout_height="27dp"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/ic_no_service_time"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_store_layout"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="store address"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/grocery_list_store_address_size"
+                android:textStyle="italic" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_grocery_buttom_content"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/rl_grocery_head_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/gray"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.3dp"
+            android:background="@color/divider" />
+
+        <RelativeLayout
+            android:id="@+id/rl_grocery_op_btns"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/iv_add"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:src="@drawable/ic_add" />
+
+            <ImageView
+                android:id="@+id/iv_checkout"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/iv_add"
+                android:clickable="true"
+                android:src="@drawable/ic_cart_bw" />
+
+            <!--<ImageView-->
+            <!--android:id="@+id/iv_del"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_toRightOf="@id/iv_add"-->
+            <!--android:clickable="true"-->
+            <!--android:src="@drawable/ic_del" />-->
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_total_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="23.0dip"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/price_panel_background">
+            <!--<LinearLayout-->
+            <!--android:id="@+id/ll_incart_layout"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginRight="16.0dip"-->
+            <!--android:layout_weight="1.0"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<com.groceryking.CustomTextView-->
+            <!--android:id="@id/inCartStaticLabel"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginRight="3.0dip"-->
+            <!--android:gravity="bottom|center"-->
+            <!--android:text="CART"-->
+            <!--android:textColor="#ffffffff"-->
+            <!--android:textSize="7.0sp" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/tv_incart_label"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:gravity="center"-->
+            <!--android:text="$"-->
+            <!--android:textColor="#ffffffff"-->
+            <!--android:textSize="15.0sp" />-->
+            <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+
+            <RelativeLayout
+                android:id="@+id/rl_statistic_total_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10.0dip">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_statistic_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="5dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="#ffffffff"
+                        android:textSize="@dimen/textview_text_size" />
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/lv_grocery_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/rl_total_layout"
+            android:layout_below="@id/rl_grocery_op_btns"
+            android:layout_marginTop="5dp" />
+    </RelativeLayout>
+</RelativeLayout>

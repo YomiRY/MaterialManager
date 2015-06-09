@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="sa_green">#14a804</color>
+    <color name="stacked_green">#B77F87</color>
+    <color name="accent_green">#97e08f</color>
+    <color name="text_shadow">#ff000000</color>
+    <color name="red">#FF0000</color>
+    <color name="gray">#BEBEBE</color>
+    <color name="white">#FFFFFF</color>
+    <color name="GK">#ff89a923</color>
+    <color name="black">#000000</color>
+    <color name="mint_green">#51c463</color>
+    <color name="dark_gray">#969696</color>
+    <color name="border_gray">#828282</color>
+
+    <color name="dark_blue">#5E7D9A</color>
+    <color name="title_text_color">#FFFFFF</color>
+    <color name="content_text_color">#000000</color>
+    <color name="spinner_background">#D3D3D3</color>
+
+    <!--LoginGroceryListFragment Background-->
+    <color name="bg_grocery_login">#ffe2e2e2</color>
+
+    <!-- GroceryListFragment -->
+    <color name="bg_checkout">#ff414747</color>
+    <color name="divider">#AAA7A7A5</color>
+
+    <!--GroceryListItemFragment-->
+    <color name="pressed_main_theme">#cc8aa923</color>
+
+    <!--Material Item-->
+    <color name="brown_text">#ffba530e</color>
+    <color name="material_item_name">#FFF38585</color>
+    <color name="grey_layout">#ffe5e1de</color>
+    <color name="light_brown_label">#fff69a1b</color>
+    <color name="light_green_label">#ff99c83d</color>
+    <color name="trans_white">#66ffffff</color>
+    <color name="grey_devider">#ffb7b2ae</color>
+
+    <!-- GlobalSearchActivity -->
+    <color name="trans_black_cover">#cc000000</color>
+
+    <!--SettingsFragment-->
+    <color name="settings_title_black">#af000000</color>
+
+    <!-- croper image view -->
+    <color name="black_translucent">#50000000</color>
+
+    <!-- pop window alert dialog -->
+    <color name="basic_blue1">#5781a9</color>
+    <color name="basic_blue2">#a4bcc6</color>
+    <color name="basic_blue3">#995781a9</color>
+    <color name="basic_orange1">#99eca14f</color>
+    <color name="basic_orange2">#66eca14f</color>
+    <color name="basic_white1">#eeffffff</color>
+    <color name="basic_white2">#99ffffff</color>
+
+    <!-- bar code scanner -->
+    <color name="contents_text">#ff000000</color>
+    <color name="encode_view">#ffffffff</color>
+    <color name="possible_result_points">#c0ffbd21</color>
+    <!-- Android standard ICS color -->
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c099cc00</color>
+    <!-- Android standard ICS color -->
+    <color name="result_text">#ffffffff</color>
+    <color name="result_view">#b0000000</color>
+    <color name="status_text">#ffffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="viewfinder_laser">#ffcc0000</color>
+    <!-- Android standard ICS color -->
+    <color name="viewfinder_mask">#60000000</color>
+
+    <!--Pinterest test color-->
+    <color name="bg_touch">#0a000000</color>
+
+    <color name="light_gray">#404040</color>
+    <color name="extra_light_gray">#E6E6E6</color>
+</resources>

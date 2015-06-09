@@ -1,0 +1,31 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion '22.0.1'
+
+    defaultConfig {
+        applicationId "com.material.management"
+        minSdkVersion 14
+        targetSdkVersion 22
+        versionCode 45
+        versionName "2.5.11"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.github.citux:datetimepicker:0.1.2'
+    compile 'com.github.PhilJay:MPAndroidChart:v1.7.4'
+    compile 'com.google.android.gms:play-services:6.5.87+'
+}

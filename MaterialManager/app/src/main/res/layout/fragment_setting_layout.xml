@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/profile_about_section_title"
+            android:text="@string/title_tv_notification_types" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/card_bg"
+            android:orientation="vertical">
+            <RadioGroup
+                android:id="@+id/rg_notif_types"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RadioButton
+                    android:id="@+id/rb_notif_type_vibrate"
+                    style="@style/section_item_radiobutton"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/title_tv_notification_vibrate" />
+
+                <View style="@style/section_item_divider" />
+
+                <RadioButton
+                    android:id="@+id/rb_notif_type_sound"
+                    style="@style/section_item_radiobutton"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_tv_notification_sound" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <TextView
+            style="@style/profile_about_section_title"
+            android:text="@string/title_tv_notification_frequnecy_label" />
+
+        <LinearLayout
+            style="@style/section_item_checkbox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/card_bg"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_notification_frequency_first_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_spin_notification_frequnecy_first_label"
+                android:textColor="#af000000"
+                android:textSize="14.0dip"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spin_notification_frequency"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:popupBackground="@color/spinner_background" />
+
+            <TextView
+                android:id="@+id/tv_notification_frequency_sec_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_spin_notification_frequnecy_sec_label"
+                android:textColor="#af000000"
+                android:textSize="14.0dip"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <TextView
+            style="@style/profile_about_section_title"
+            android:text="@string/title_tv_font_size_label" />
+
+        <LinearLayout
+            style="@style/section_item_checkbox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/card_bg"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_font_size_first_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_tv_font_size_scale_first_label"
+                android:textColor="@color/settings_title_black"
+                android:textSize="14.0dip"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spin_font_size_scale_factor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:popupBackground="@color/spinner_background" />
+
+            <TextView
+                android:id="@+id/tv_font_size_sec_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_tv_font_size_scale_sec_label"
+                android:textColor="@color/settings_title_black"
+                android:textSize="14.0dip"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+
+        <TextView
+            style="@style/profile_about_section_title"
+            android:text="@string/title_cloud_backup_restore" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/card_bg"
+            android:orientation="vertical">
+
+            <CheckedTextView
+                android:id="@+id/cb_dropbox_enable"
+                style="@style/section_item_checkbox"
+                android:layout_height="wrap_content"
+                android:background="@drawable/touch_clear_bg"
+                android:text="@string/title_dropbox_enable" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/profile_about_section_title"
+            android:text="@string/title_tv_database_manage" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/card_bg"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_database_backup"
+                android:layout_width="wrap_content"
+                android:layout_height="60.0dip"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:clickable="true"
+                android:text="@string/title_tv_backup_database"
+                android:textColor="#af000000"
+                android:textSize="14.0dip"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dip"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tv_database_restore"
+                android:layout_width="wrap_content"
+                android:layout_height="60.0dip"
+                android:gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:text="@string/title_tv_restore_database"
+                android:textColor="#af000000"
+                android:textSize="14.0dip"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:background="@drawable/bg_title">-->
+
+        <!--&lt;!&ndash; Notification types &ndash;&gt;--><!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:orientation="vertical">-->
+
+        <!--<TextView--><!--android:id="@+id/tv_notification_types"--><!--android:text="@string/title_tv_notification_types"--><!--style="@style/setting_fragment_title"/>-->
+
+        <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="50dp"--><!--android:gravity="center"--><!--android:orientation="horizontal"--><!--android:paddingBottom="15dip"--><!--android:paddingLeft="15dip"--><!--android:paddingTop="15dip">-->
+
+        <!--<RadioGroup--><!--android:id="@+id/rg_notif_types"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:orientation="horizontal">-->
+
+        <!--<RadioButton--><!--android:id="@+id/rb_notif_type_vibrate"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:checked="true"--><!--android:text="@string/title_tv_notification_vibrate"--><!--android:textColor="@color/title_text_color" />-->
+
+        <!--<RadioButton--><!--android:id="@+id/rb_notif_type_sound"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginLeft="40dp"--><!--android:text="@string/title_tv_notification_sound"--><!--android:textColor="@color/title_text_color" />--><!--</RadioGroup>--><!--</LinearLayout>-->
+
+        <!--&lt;!&ndash; Notification frequency in a day &ndash;&gt;-->
+
+        <!--<TextView--><!--android:text="@string/title_tv_notification_frequnecy_label"--><!--style="@style/setting_fragment_title"/>-->
+
+        <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="67dp"--><!--android:gravity="center"--><!--android:orientation="horizontal"--><!--android:paddingBottom="15dip"--><!--android:paddingLeft="15dip"--><!--android:paddingTop="15dip">-->
+
+        <!--<TextView--><!--android:id="@+id/tv_notification_frequency_first_label"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:text="@string/title_spin_notification_frequnecy_first_label"--><!--android:textColor="@color/title_text_color"--><!--android:textStyle="bold" />-->
+
+        <!--<Spinner--><!--android:id="@+id/spin_notification_frequency"--><!--android:layout_width="60dp"--><!--android:layout_height="wrap_content"--><!--android:popupBackground="@color/spinner_background" />-->
+
+        <!--<TextView--><!--android:id="@+id/tv_notification_frequency_sec_label"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:text="@string/title_spin_notification_frequnecy_sec_label"--><!--android:textColor="@color/title_text_color"--><!--android:textStyle="bold" />--><!--</LinearLayout>-->
+
+        <!--<TextView--><!--android:text="@string/title_cloud_backup_restore"--><!--style="@style/setting_fragment_title"/>-->
+
+        <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="50dp"--><!--android:gravity="center"--><!--android:orientation="horizontal"--><!--android:paddingBottom="15dip"--><!--android:paddingLeft="15dip"--><!--android:paddingTop="15dip">-->
+
+        <!--<CheckBox--><!--android:id="@+id/cb_dropbox_enable"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:checked="false"--><!--android:text="@string/title_dropbox_enable"--><!--android:textColor="@color/title_text_color" />--><!--</LinearLayout>-->
+
+        <!--&lt;!&ndash; Database backup/restore &ndash;&gt;-->
+
+        <!--<TextView--><!--android:text="@string/title_tv_database_manage"--><!--style="@style/setting_fragment_title"/>-->
+
+        <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="50dp"--><!--android:gravity="center"--><!--android:orientation="horizontal"--><!--android:paddingBottom="15dip"--><!--android:paddingLeft="15dip"--><!--android:paddingTop="15dip">-->
+
+        <!--<TextView--><!--android:id="@+id/tv_database_backup"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginRight="20dp"--><!--android:background="@drawable/selector_database_backup_restore_background"--><!--android:clickable="true"--><!--android:text="@string/title_tv_backup_database"--><!--android:textColor="@color/title_text_color" />-->
+
+        <!--<View--><!--android:layout_width="1dp"--><!--android:layout_height="match_parent"--><!--android:background="@android:color/darker_gray" />-->
+
+        <!--<TextView--><!--android:id="@+id/tv_database_restore"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginLeft="20dp"--><!--android:background="@drawable/selector_database_backup_restore_background"--><!--android:clickable="true"--><!--android:text="@string/title_tv_restore_database"--><!--android:textColor="@color/title_text_color" />--><!--</LinearLayout>--><!--</LinearLayout>-->
+
+        <!--</ScrollView>-->
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/iv_place_photo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/iv_place_photo">
+        <TextView
+            android:id="@+id/tv_store_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="店家名稱"/>
+
+        <TextView
+            android:id="@+id/tv_store_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/tv_store_name"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/bg_checkout"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:text="店家地址"/>
+
+        <TextView
+            android:id="@+id/tv_store_dist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@id/tv_store_address"
+            android:gravity="right"
+            android:textSize="14sp"
+            android:text="距離 5 公里"/>
+    </RelativeLayout>
+</RelativeLayout>

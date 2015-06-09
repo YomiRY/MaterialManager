@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_grocery_item_border">
+    <RelativeLayout
+        android:id="@+id/rl_grocery_item_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_material_item_background">
+        <ImageView
+            android:id="@+id/iv_grocery_thumbnail"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_grocery_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/iv_grocery_thumbnail"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/iv_grocery_thumbnail"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="物品種類"
+            android:textColor="@color/dark_gray"
+            android:textSize="@dimen/grocery_item_type_size"/>
+
+        <TextView
+            android:id="@+id/tv_grocery_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_grocery_type"
+            android:layout_alignRight="@+id/tv_grocery_type"
+            android:layout_below="@id/tv_grocery_type"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/iv_grocery_thumbnail"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="物品名稱"
+            android:textColor="@color/black"
+            android:textSize="@dimen/grocery_item_name_size" />
+
+        <TextView
+            android:id="@+id/tv_grocery_qty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_grocery_name"
+            android:layout_alignRight="@+id/tv_grocery_name"
+            android:layout_below="@id/tv_grocery_name"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="35dp"
+            android:layout_toRightOf="@+id/iv_grocery_thumbnail"
+            android:ellipsize="end"
+            android:gravity="center_vertical|right"
+            android:singleLine="true"
+            android:text="x 2"
+            android:textColor="@color/dark_gray"
+            android:textSize="@dimen/textview_text_size" />
+
+        <TextView
+            android:id="@+id/tv_grocery_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_grocery_qty"
+            android:layout_alignRight="@+id/tv_grocery_qty"
+            android:layout_below="@id/tv_grocery_qty"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/iv_grocery_thumbnail"
+            android:ellipsize="end"
+            android:gravity="center_vertical|right"
+            android:singleLine="true"
+            android:text="$ 200"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textview_text_size" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_not_purchased_gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.65"
+        android:layout_alignTop="@id/rl_grocery_item_content"
+        android:layout_alignBottom="@id/rl_grocery_item_content"
+        android:background="@drawable/bg_gray_mask"/>
+</RelativeLayout>

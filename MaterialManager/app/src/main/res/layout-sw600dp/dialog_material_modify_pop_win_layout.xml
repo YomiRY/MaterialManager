@@ -1,0 +1,347 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrolv_setting"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!-- request focus before EditText -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip">
+
+            <TextView
+                android:id="@+id/tv_material_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_material_name"
+                android:textStyle="bold"
+                android:textColor="@color/content_text_color"
+                android:textSize="@dimen/textview_text_size"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/act_material_name"
+                style="@style/EditTextAppTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_material_name"
+                android:layout_toRightOf="@id/tv_material_name"
+                android:completionThreshold="1"
+                android:ems="10"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/content_text_color"
+                android:textSize="@dimen/textview_text_size"/>
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"            
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip" >
+
+            <TextView
+                android:id="@+id/tv_title_barcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_barcode"
+                android:textColor="@color/content_text_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/textview_text_size"/>
+
+            <TextView
+                android:id="@+id/tv_barcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_title_barcode"
+                android:layout_marginLeft="10dp"
+                android:clickable="true"
+                android:drawableTop="@drawable/selector_barcode"
+                android:text="x xxxxxx xxxxxx x"
+                android:gravity="center"                
+                android:textColor="@color/content_text_color"
+                android:textStyle="bold" />               
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip">
+
+            <TextView
+                android:id="@+id/tv_material_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_material_category"
+                android:textColor="@color/content_text_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/textview_text_size"/>
+
+            <Spinner
+                android:id="@+id/spin_material_category"
+                style="@style/SpinnerAppTheme.DropDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@id/tv_material_category"
+                android:spinnerMode="dropdown" />
+        </RelativeLayout>
+
+        <!--
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip" >
+
+            <TextView
+                android:id="@+id/tv_purchace_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_purchace_date"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <DatePicker
+                android:id="@+id/dp_purchace_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_purchace_date"
+                android:layout_toRightOf="@id/tv_purchace_date"
+                android:calendarViewShown="false" />
+        </RelativeLayout>
+        -->
+
+
+        <!--
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"            
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip" >
+
+            <TextView
+                android:id="@+id/tv_valid_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_valid_date"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <DatePicker
+                android:id="@+id/dp_valid_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_valid_date"
+                android:layout_toRightOf="@id/tv_valid_date"
+                android:calendarViewShown="false" />
+        </RelativeLayout>
+        -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip">
+
+            <TextView
+                android:id="@+id/tv_notification_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_notification"
+                android:textColor="@color/content_text_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/textview_text_size"/>
+            <!-- only for number input -->
+
+            <EditText
+                android:id="@+id/et_notification_days"
+                style="@style/EditTextAppTheme"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_notification_days"
+                android:layout_toRightOf="@id/tv_notification_days"
+                android:digits="0123456789"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:textColor="@color/content_text_color"
+                android:textSize="@dimen/textview_text_size"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/et_notification_days"
+                android:paddingTop="10dp"
+                android:text="@string/title_tv_notification_days"
+                android:textColor="@color/content_text_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/textview_text_size"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip">
+
+            <TextView
+                android:id="@+id/tv_material_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_material_pic"
+                android:textColor="@color/content_text_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/textview_text_size"/>
+
+            <LinearLayout
+                android:id="@+id/ll_icon_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="80dp">
+
+                <ImageView
+                    android:id="@+id/imgv_material_pic_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:src="@drawable/selector_camera_state" />
+
+                <ImageView
+                    android:id="@+id/imgv_material_pic_album"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:src="@drawable/selector_album_state" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgv_preview_pic"
+                android:layout_width="320dp"
+                android:layout_height="240dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:layout_toRightOf="@id/ll_icon_layout"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/rl_on_loading"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@id/ll_icon_layout">
+                <include
+                    layout="@layout/view_empty_loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip">
+
+            <TextView
+                android:id="@+id/tv_material_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_material_place"
+                android:textColor="@color/content_text_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/textview_text_size"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/act_material_place"
+                style="@style/EditTextAppTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_material_place"
+                android:layout_toRightOf="@id/tv_material_place"
+                android:completionThreshold="1"
+                android:ems="10"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/content_text_color"
+                android:textSize="@dimen/textview_text_size"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="15dip">
+
+            <TextView
+                android:id="@+id/tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_tv_comment"
+                android:textColor="@color/content_text_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/textview_text_size"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/act_comment"
+                style="@style/EditTextAppTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/tv_comment"
+                android:completionThreshold="1"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:textColor="@color/content_text_color"
+                android:textSize="@dimen/textview_text_size"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>
