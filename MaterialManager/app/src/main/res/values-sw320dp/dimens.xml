@@ -1,6 +1,0 @@
-<resources>
-
-    <!--AboutDialog-->
-    <dimen name="dialog_about_width_size">320dp</dimen>
-
-</resources>
