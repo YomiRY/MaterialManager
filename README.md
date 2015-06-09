@@ -17,3 +17,5 @@ It's a Expired-Monitor to monitor the expiration date of everything. The source 
 
 ![image](https://github.com/YomiRY/MaterialManager/blob/master/image-folder/device-8.png)
 
+![image](https://github.com/YomiRY/MaterialManager/blob/master/image-folder/device-9.png)
+
