@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -152,7 +153,7 @@ public class MaterialModifyDialog extends AlertDialog.Builder implements OnClick
 
         /* We don't need add/delete category item in the dialog */
         ArrayList<String> spinList = DBUtility.selectMaterialTypeInfo();
-        ArrayAdapter categoryAdapter = new ArrayAdapter<String>(mContext, R.layout.view_spinner_item_layout, spinList){
+        ArrayAdapter categoryAdapter = new ArrayAdapter<String>(mContext, R.layout.view_spinner_item_layout, spinList) {
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 View v = super.getDropDownView(position, convertView, parent);
 
@@ -168,7 +169,8 @@ public class MaterialModifyDialog extends AlertDialog.Builder implements OnClick
 //              changeLayoutConfig(v);
                 return v;
             }
-        };;
+        };
+        ;
 
         mSpinMaterialCategory.setAdapter(categoryAdapter);
     }
@@ -199,7 +201,7 @@ public class MaterialModifyDialog extends AlertDialog.Builder implements OnClick
             }
         }
 
-        for(String text : mTextHistoryList) {
+        for (String text : mTextHistoryList) {
             textHistory.append(text);
             textHistory.append(":");
         }
@@ -208,14 +210,13 @@ public class MaterialModifyDialog extends AlertDialog.Builder implements OnClick
     }
 
     public void setCameraPic(Bitmap newBitmap) {
-            Bitmap oldBmp = ((BitmapDrawable) mImgvPreviewPic.getDrawable()).getBitmap();
+        Bitmap oldBmp = ((BitmapDrawable) mImgvPreviewPic.getDrawable()).getBitmap();
 
-            if(oldBmp != null) {
-                mImgvPreviewPic.setImageBitmap(null);
-                Utility.releaseBitmaps(oldBmp);
-                oldBmp = null;
-            }
-            mImgvPreviewPic.setImageBitmap(newBitmap);
+        mImgvPreviewPic.setImageBitmap(null);
+        Utility.releaseBitmaps(oldBmp);
+        oldBmp = null;
+
+        mImgvPreviewPic.setImageBitmap(newBitmap);
     }
 
     public void setBarcodeInfo(String barcodeFormat, String barcode) {
@@ -255,27 +256,27 @@ public class MaterialModifyDialog extends AlertDialog.Builder implements OnClick
         int id = v.getId();
 
         switch (id) {
-        case R.id.imgv_material_pic_camera: {
+            case R.id.imgv_material_pic_camera: {
             /* from camera */
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(FileUtility.TEMP_PHOTO_FILE));
-            mParFragment.startActivityForResult(takePictureIntent, REQ_CAMERA_TAKE_PIC);
-        }
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(FileUtility.TEMP_PHOTO_FILE));
+                mParFragment.startActivityForResult(takePictureIntent, REQ_CAMERA_TAKE_PIC);
+            }
             break;
-        case R.id.imgv_material_pic_album: {
-            Intent albumPictureIntent = new Intent(Intent.ACTION_PICK,
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            case R.id.imgv_material_pic_album: {
+                Intent albumPictureIntent = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-            mParFragment.startActivityForResult(
-                    Intent.createChooser(albumPictureIntent, mContext.getString(R.string.title_image_chooser_title)),
-                    REQ_SELECT_PICTURE);
-        }
+                mParFragment.startActivityForResult(
+                        Intent.createChooser(albumPictureIntent, mContext.getString(R.string.title_image_chooser_title)),
+                        REQ_SELECT_PICTURE);
+            }
             break;
-        case R.id.tv_barcode: {
-            IntentIntegrator integrator = new IntentIntegrator(mParFragment);
-            integrator.initiateScan();
-        }
+            case R.id.tv_barcode: {
+                IntentIntegrator integrator = new IntentIntegrator(mParFragment);
+                integrator.initiateScan();
+            }
             break;
         }
     }

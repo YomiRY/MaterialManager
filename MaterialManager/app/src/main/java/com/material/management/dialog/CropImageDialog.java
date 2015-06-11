@@ -73,21 +73,29 @@ public class CropImageDialog extends AlertDialog.Builder implements View.OnClick
         } else if (imgW == imgH) {
             mScaleH = mScaleW;
         } else if (imgW != imgH) {
-            mScaleH = (int)(mScaleW * ((float)imgH / imgW));
+            mScaleH = (int) (mScaleW * ((float) imgH / imgW));
         }
     }
 
     private void initView() {
+        Bitmap targetImage = Bitmap.createScaledBitmap(mSrcImage, mScaleW, mScaleH, false);
+
+        if(mSrcImage != targetImage) {
+            Utility.releaseBitmaps(mSrcImage);
+            mSrcImage = null;
+        }
+
         LayoutInflater layoutInflater = (LayoutInflater) Utility.getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         mLayout = layoutInflater.inflate(R.layout.dialog_crop_image_layout, null);
-        Bitmap targetImage = Bitmap.createScaledBitmap(mSrcImage, mScaleW, mScaleH, false);
         mRlCropImg = (RelativeLayout) mLayout.findViewById(R.id.rl_crop_img);
         mCivSourceImage = (CropImageView) mLayout.findViewById(R.id.civ_source_image);
         // Sets the rotate button
         mBtnRotateLeft = (TextView) mLayout.findViewById(R.id.btn_rotate_right);
         mBtnRotateRight = (TextView) mLayout.findViewById(R.id.btn_rotate_left);
 
+        mCivSourceImage.setMinimumWidth(mScaleW);
+        mCivSourceImage.setMinimumHeight(mScaleH);
         mBtnRotateLeft.setOnClickListener(this);
         mBtnRotateRight.setOnClickListener(this);
         // Sets initial aspect ratio to 10/10, for demonstration purposes
@@ -117,13 +125,10 @@ public class CropImageDialog extends AlertDialog.Builder implements View.OnClick
             /* it won't use the recycled bitmap after the dialog hided */
             mCivSourceImage.setImageBitmap(null);
 
-            if (bitmap != null && !bitmap.isRecycled()) {
-                Utility.releaseBitmaps(bitmap);
-                bitmap = null;
-            }
+            Utility.releaseBitmaps(bitmap);
+            bitmap = null;
+
         }
-
-
     }
 
     @Override

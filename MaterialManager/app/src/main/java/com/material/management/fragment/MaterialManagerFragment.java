@@ -55,10 +55,8 @@ import com.material.management.data.BundleInfo;
 import com.material.management.data.Material;
 import com.material.management.data.StreamItem;
 import com.material.management.interf.ISearchUpdate;
-import com.material.management.utils.AnimatorUtility;
 import com.material.management.utils.DBUtility;
 import com.material.management.utils.FileUtility;
-import com.material.management.utils.LogUtility;
 import com.material.management.utils.Utility;
 import com.picasso.Callback;
 import com.picasso.Picasso;
@@ -133,6 +131,9 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
         mMaterialMenuDialog = null;
         mMaterialModifyDialog = null;
         mBarcodeDialog = null;
+
+        Utility.releaseBitmaps(mNewestBitmap);
+
         super.onDestroyView();
     }
 
@@ -234,8 +235,8 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
                 };
 
                 showAlertDialog(getString(R.string.title_confirm_del_dialog), getString(R.string.msg_confirm_del_dialog)
-                               , getString(R.string.title_positive_btn_label), getString(R.string.title_negative_btn_label)
-                               , confirmListener, null);
+                        , getString(R.string.title_positive_btn_label), getString(R.string.title_negative_btn_label)
+                        , confirmListener, null);
             } else if (isTypePhoto) {
                 materialItem.setIsAsPhotoType(1);
                 DBUtility.updateMaterialIsAsPhotoType(materialItem);
@@ -304,9 +305,12 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
 
                 if (mMaterialModifyDialog != null && mMaterialModifyDialog.isShowing()) {
                     /* TODO: Need to modify the update and insert db flow by pic path not by bitmap */
+                    Bitmap tmp = mSelectedMaterial.getMaterialPic();
+
                     mSelectedMaterial.setMaterialPic(mNewestBitmap);
                     mMaterialModifyDialog.setCameraPic(null);
                     mMaterialModifyDialog.setCameraPic(mNewestBitmap);
+                    Utility.releaseBitmaps(tmp);
                 }
                 mCropImgDialog.setShowState(false);
             } else if (mMaterialModifyDialog != null && mMaterialModifyDialog.isShowing()) {
@@ -321,6 +325,9 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
                 update(null);
                 mMaterialTypeAdapter.triggerSelectMaterialType(oldMaterial.getMaterialType(), null);
             }
+        } else {
+            Utility.releaseBitmaps(mNewestBitmap);
+            mNewestBitmap = null;
         }
         dialog.dismiss();
     }
@@ -439,7 +446,7 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
             float h = (float) (mMetrics.heightPixels / mMetrics.density);
 
             if (h > 900) {
-                px = (int) ((8 * ( mMaterialTypGridNum+ 1) * mMetrics.density) + 0.5f);
+                px = (int) ((8 * (mMaterialTypGridNum + 1) * mMetrics.density) + 0.5f);
             } else {
                 px = (int) ((5 * (mMaterialTypGridNum + 1) * mMetrics.density) + 0.5f);
             }
@@ -762,38 +769,46 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             final ViewGroup view;
+            final ViewHolder viewHolder;
             Material item = getItem(position);
 
             if (convertView == null) {
                 view = (ViewGroup) mInflater.inflate(R.layout.material_item_layout, parent, false);
+                viewHolder = new ViewHolder();
+                viewHolder.materialName = (TextView) view.findViewById(R.id.tv_material_item_name);
+                viewHolder.materialType = (TextView) view.findViewById(R.id.tv_material_item_type);
+                viewHolder.purchaceDate = (TextView) view.findViewById(R.id.tv_material_purchace_date);
+                viewHolder.validDate = (TextView) view.findViewById(R.id.tv_material_valid_date);
+                viewHolder.place = (TextView) view.findViewById(R.id.tv_material_place);
+                viewHolder.comment = (TextView) view.findViewById(R.id.tv_material_comment);
+                viewHolder.onnLoading = (RelativeLayout) view.findViewById(R.id.rl_on_loading);
+                viewHolder.materialPic = (ImageView) view.findViewById(R.id.iv_material_pic);
+                viewHolder.unit = (TextView) view.findViewById(R.id.tv_unit);
+                viewHolder.expired = (TextView) view.findViewById(R.id.tv_material_expired);
+                viewHolder.restDay = (TextView) view.findViewById(R.id.tv_rest_days);
+                viewHolder.noValidDate = (TextView) view.findViewById(R.id.tv_valid_date_no_set_up);
+                viewHolder.remindTick = view.findViewById(R.id.ll_reminder_label);
 
+                view.setTag(viewHolder);
                 changeLayoutConfig(view);
             } else {
                 view = (ViewGroup) convertView;
+                viewHolder = (ViewHolder) view.getTag();
             }
 
-            final RelativeLayout rlOnLoading = (RelativeLayout) view.findViewById(R.id.rl_on_loading);
-            final ImageView ivMaterialPic = (ImageView) view.findViewById(R.id.iv_material_pic);
-//            final ImageView ivExpandPic = (ImageView) view.findViewById(R.id.iv_expanded_image);
-            TextView tvRestDay = ((TextView) view.findViewById(R.id.tv_rest_days));
-            TextView tvUnit = ((TextView) view.findViewById(R.id.tv_unit));
-            TextView tvExpired = ((TextView) view.findViewById(R.id.tv_material_expired));
-            TextView tvNoValidDate = (TextView) view.findViewById(R.id.tv_valid_date_no_set_up);
-            View remindTick = view.findViewById(R.id.ll_reminder_label);
             String restDay = item.getResetDaysInfo();
             boolean isNeedBarcodeIc = (item.getBarcode() != null && !item.getBarcode().isEmpty()) ? true : false;
 
-            tvRestDay.setSelected(true);
-            tvNoValidDate.setSelected(true);
-
+            viewHolder.restDay.setSelected(true);
+            viewHolder.noValidDate.setSelected(true);
 //            ivMaterialPic.setOnClickListener(null);
-            rlOnLoading.setVisibility(View.VISIBLE);
-            Picasso.with(mOwnerActivity).cancelRequest(ivMaterialPic);
-            Picasso.with(mOwnerActivity).load(new File(item.getMaterialPicPath())).centerCrop().resize(mScaledSize, mScaledSize).into(ivMaterialPic, new Callback() {
+            viewHolder.onnLoading.setVisibility(View.VISIBLE);
+            Picasso.with(mOwnerActivity).cancelRequest(viewHolder.materialPic);
+            Picasso.with(mOwnerActivity).load(new File(item.getMaterialPicPath())).centerCrop().resize(mScaledSize, mScaledSize).into(viewHolder.materialPic, new Callback() {
                 @Override
                 public void onSuccess() {
-                    rlOnLoading.setVisibility(View.GONE);
-                    ivMaterialPic.setOnClickListener(new OnClickListener() {
+                    viewHolder.onnLoading.setVisibility(View.GONE);
+                    viewHolder.materialPic.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
 //                            Bitmap bmp = ((BitmapDrawable) ivMaterialPic.getDrawable()).getBitmap();
@@ -805,7 +820,7 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
 
                 @Override
                 public void onError() {
-                    rlOnLoading.setVisibility(View.GONE);
+                    viewHolder.onnLoading.setVisibility(View.GONE);
                 }
             });
 
@@ -820,71 +835,81 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
                         defaultBarcodeImg, null);
             }
 
-            ((TextView) view.findViewById(R.id.tv_material_item_name)).setText(Utility.formatMatchedString(
-                    item.getName(), mSearchStr));
-            view.findViewById(R.id.tv_material_item_name).setSelected(true);
+            viewHolder.materialName.setText(Utility.formatMatchedString(item.getName(), mSearchStr));
+            viewHolder.materialName.setSelected(true);
 
-            ((TextView) view.findViewById(R.id.tv_material_item_type)).setText(Utility.formatMatchedString(
-                    item.getMaterialType(), mSearchStr));
-            view.findViewById(R.id.tv_material_item_type).setSelected(true);
+            viewHolder.materialType.setText(Utility.formatMatchedString(item.getMaterialType(), mSearchStr));
+            viewHolder.materialType.setSelected(true);
 
-            ((TextView) view.findViewById(R.id.tv_material_purchace_date)).setText(Utility.formatMatchedString(
-                    Utility.transDateToString(item.getPurchaceDate().getTime()), mSearchStr));
-            view.findViewById(R.id.tv_material_purchace_date).setSelected(true);
+            viewHolder.purchaceDate.setText(Utility.formatMatchedString(Utility.transDateToString(item.getPurchaceDate().getTime()), mSearchStr));
+            viewHolder.purchaceDate.setSelected(true);
 
-            ((TextView) view.findViewById(R.id.tv_material_valid_date)).setText(Utility.formatMatchedString(
-                    Utility.transDateToString(item.getValidDate().getTime()), mSearchStr));
-            view.findViewById(R.id.tv_material_valid_date).setSelected(true);
+            viewHolder.validDate.setText(Utility.formatMatchedString(Utility.transDateToString(item.getValidDate().getTime()), mSearchStr));
+            viewHolder.validDate.setSelected(true);
 
-            ((TextView) view.findViewById(R.id.tv_material_place)).setText(Utility.formatMatchedString(
-                    item.getMaterialPlace(), mSearchStr));
-            view.findViewById(R.id.tv_material_place).setSelected(true);
+            viewHolder.place.setText(Utility.formatMatchedString(item.getMaterialPlace(), mSearchStr));
+            viewHolder.place.setSelected(true);
 
-            ((TextView) view.findViewById(R.id.tv_material_comment)).setText(Utility.formatMatchedString(
-                    item.getComment(), mSearchStr));
-            view.findViewById(R.id.tv_material_comment).setSelected(true);
+            viewHolder.comment.setText(Utility.formatMatchedString(item.getComment(), mSearchStr));
+            viewHolder.comment.setSelected(true);
 
             /* Check out */
             if (item.getIsValidDateSetup() == 1) {
-                tvNoValidDate.setVisibility(View.GONE);
+                viewHolder.noValidDate.setVisibility(View.GONE);
                 /* if material has been expired, then change the text color as red. */
                 if (restDay.equals(sActivity.getResources().getString(R.string.msg_expired))) {
                 /* View item maybe cached before, so we need to re-assign the background color */
-                    tvRestDay.setVisibility(View.GONE);
-                    tvUnit.setVisibility(View.GONE);
-                    remindTick.setVisibility(View.GONE);
-                    tvExpired.setVisibility(View.VISIBLE);
-                    tvExpired.setBackgroundResource(R.color.red);
+                    viewHolder.restDay.setVisibility(View.GONE);
+                    viewHolder.unit.setVisibility(View.GONE);
+                    viewHolder.remindTick.setVisibility(View.GONE);
+                    viewHolder.expired.setVisibility(View.VISIBLE);
+                    viewHolder.expired.setBackgroundResource(R.color.red);
 
-                    tvExpired.setText(Utility.formatMatchedString(restDay, mSearchStr));
+                    viewHolder.expired.setText(Utility.formatMatchedString(restDay, mSearchStr));
                 } else {
                 /* View item maybe cached before, so we need to re-assign the background color */
-                    tvRestDay.setVisibility(View.VISIBLE);
-                    tvUnit.setVisibility(View.VISIBLE);
-                    remindTick.setVisibility(View.VISIBLE);
-                    tvExpired.setVisibility(View.GONE);
+                    viewHolder.restDay.setVisibility(View.VISIBLE);
+                    viewHolder.unit.setVisibility(View.VISIBLE);
+                    viewHolder.remindTick.setVisibility(View.VISIBLE);
+                    viewHolder.expired.setVisibility(View.GONE);
 
                     int days = Integer.parseInt(restDay);
 
                     if (days <= 10) {
-                        remindTick.setBackgroundResource(R.color.light_brown_label);
+                        viewHolder.remindTick.setBackgroundResource(R.color.light_brown_label);
                     } else {
-                        remindTick.setBackgroundResource(R.color.light_green_label);
+                        viewHolder.remindTick.setBackgroundResource(R.color.light_green_label);
                     }
 
-                    tvRestDay.setText(Utility.formatMatchedString(restDay, mSearchStr));
+                    viewHolder.restDay.setText(Utility.formatMatchedString(restDay, mSearchStr));
                 }
             } else {
-                tvNoValidDate.setVisibility(View.VISIBLE);
-                tvNoValidDate.setBackgroundResource(R.color.gray);
-                tvRestDay.setVisibility(View.GONE);
-                tvUnit.setVisibility(View.GONE);
-                remindTick.setVisibility(View.GONE);
-                tvExpired.setVisibility(View.GONE);
-                ((TextView) view.findViewById(R.id.tv_material_valid_date)).setText("N/A");
+                viewHolder.noValidDate.setVisibility(View.VISIBLE);
+                viewHolder.noValidDate.setBackgroundResource(R.color.gray);
+                viewHolder.restDay.setVisibility(View.GONE);
+                viewHolder.unit.setVisibility(View.GONE);
+                viewHolder.remindTick.setVisibility(View.GONE);
+                viewHolder.expired.setVisibility(View.GONE);
+                viewHolder.validDate.setText("N/A");
             }
 
             return view;
+        }
+
+        private class ViewHolder {
+            RelativeLayout onnLoading;
+            ImageView materialPic;
+            TextView materialName;
+            TextView materialType;
+            TextView purchaceDate;
+            TextView validDate;
+            TextView place;
+            TextView comment;
+            TextView restDay;
+            TextView unit;
+            TextView expired;
+            TextView noValidDate;
+            View remindTick;
         }
 
         @Override
@@ -982,18 +1007,17 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
 
         switch (requestCode) {
             case REQ_CAMERA_TAKE_PIC: {
-                Utility.releaseBitmaps(mNewestBitmap);
-                mNewestBitmap = null;
                 if (Activity.RESULT_OK == resultCode) {
+                    Bitmap bitmap = null;
                     try {
-                        mNewestBitmap = BitmapFactory.decodeFile(FileUtility.TEMP_PHOTO_FILE.getAbsolutePath(), mOptions);
+                        bitmap = BitmapFactory.decodeFile(FileUtility.TEMP_PHOTO_FILE.getAbsolutePath(), mOptions);
                     } catch (OutOfMemoryError e) {
                         e.printStackTrace();
                         System.gc();
                     }
 
-                    if (mNewestBitmap != null) {
-                        mCropImgDialog = new CropImageDialog(sActivity, mNewestBitmap, this);
+                    if (bitmap != null) {
+                        mCropImgDialog = new CropImageDialog(sActivity, bitmap, this);
 
                         mCropImgDialog.show();
                     }
@@ -1002,11 +1026,6 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
             break;
 
             case REQ_SELECT_PICTURE: {
-                if (mNewestBitmap != null && !mNewestBitmap.isRecycled()) {
-                    Utility.releaseBitmaps(mNewestBitmap);
-                    mNewestBitmap = null;
-                }
-
                 if (Activity.RESULT_OK == resultCode && intent != null) {
                     Uri selectedImageUri = intent.getData();
                     String selectedImagePath = Utility.getPathFromUri(selectedImageUri);
@@ -1040,7 +1059,7 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
                     String barcodeFormat = scanResult.getFormatName();
                     String barcodeContent = scanResult.getContents();
 
-                    if(barcodeFormat != null && barcodeContent != null) {
+                    if (barcodeFormat != null && barcodeContent != null) {
                         mMaterialModifyDialog.setBarcodeInfo(null, null);
                         mMaterialModifyDialog.setBarcodeInfo(scanResult.getFormatName(), scanResult.getContents());
                     }

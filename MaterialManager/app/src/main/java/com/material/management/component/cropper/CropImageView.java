@@ -249,11 +249,15 @@ public class CropImageView extends FrameLayout {
      * @param bitmap the Bitmap to set
      */
     public void setImageBitmap(Bitmap bitmap) {
-        mBitmap = bitmap;
-        mImageView.setImageBitmap(mBitmap);
+        mImageView.setImageBitmap(null);
+        Utility.releaseBitmaps(mBitmap);
 
-        if (bitmap == null)
+        if (bitmap == null) {
             return;
+        } else {
+            mBitmap = bitmap;
+            mImageView.setImageBitmap(mBitmap);
+        }
 
         if (mCropOverlayView != null) {
             mCropOverlayView.resetCropOverlayView();
@@ -364,7 +368,7 @@ public class CropImageView extends FrameLayout {
                 (int) actualCropWidth,
                 (int) actualCropHeight);
 
-        if(!mBitmap.isRecycled() && mBitmap != croppedBitmap) {
+        if (!mBitmap.isRecycled() && mBitmap != croppedBitmap) {
             Utility.releaseBitmaps(mBitmap);
             mBitmap = null;
         }
@@ -474,11 +478,6 @@ public class CropImageView extends FrameLayout {
         } catch (OutOfMemoryError e) {
             e.printStackTrace();
             System.gc();
-        }
-        if(mBitmap != null && mBitmap != rotatedBitmap) {
-            Utility.releaseBitmaps(mBitmap);
-            mBitmap = null;
-            mBitmap = rotatedBitmap;
         }
 
         setImageBitmap(rotatedBitmap);

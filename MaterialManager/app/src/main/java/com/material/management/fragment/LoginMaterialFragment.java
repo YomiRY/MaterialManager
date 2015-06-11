@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.LinkedHashSet;
 import java.util.regex.Pattern;
+
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -24,6 +25,7 @@ import com.material.management.utils.BarCodeUtility;
 import com.material.management.utils.DBUtility;
 import com.material.management.utils.FileUtility;
 import com.material.management.utils.Utility;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -61,7 +63,7 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
     public static final String ACTION_BAR_BTN_ACTION_CLEAR = "clear_user_input";
     private static final int REQ_CAMERA_TAKE_PIC = 1;
     private static final int REQ_SELECT_PICTURE = 2;
-//    private static final String CATEGORY_IS_INITIALIZED = "category_is_initialized";
+    //    private static final String CATEGORY_IS_INITIALIZED = "category_is_initialized";
     private static final String DATEPICKER_TAG = "datepicker";
     private static MainActivity sActivity;
     private static Pattern sMaterialNameErrorPattern = Pattern.compile(".*[\\\\/?]+.*", Pattern.DOTALL);
@@ -102,7 +104,7 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        sActivity  = (MainActivity) getActivity();
+        sActivity = (MainActivity) getActivity();
         mImm = (InputMethodManager) sActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
         mLayout = inflater.inflate(R.layout.fragment_login_material_layout, container, false);
         boolean isInitialized = Utility.getBooleanValueForKey(Utility.CATEGORY_IS_INITIALIZED);
@@ -153,7 +155,7 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
         int isNeedDbWarnDialog = Utility.getIntValueForKey(Utility.DB_UPGRADE_FLAG_1to2);
         isNeedDbWarnDialog = isNeedDbWarnDialog + Utility.getIntValueForKey(Utility.DB_UPGRADE_FLAG_2to3);
 
-        if(isNeedDbWarnDialog != 0) {
+        if (isNeedDbWarnDialog != 0) {
             AlertDialog.Builder warnDialog = new AlertDialog.Builder(sActivity, R.style.AlertDialogTheme);
 
             warnDialog.setTitle(getResources().getString(R.string.title_db_upgrade_dialog));
@@ -186,6 +188,9 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
     @Override
     public void onDestroyView() {
         sActivity = null;
+
+        Utility.releaseBitmaps(mNewestBitmap);
+
         super.onDestroyView();
     }
 
@@ -195,7 +200,7 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
     }
 
     private void initSpinnerData() {
-        if(mMaterialTypes == null) {
+        if (mMaterialTypes == null) {
             return;
         }
 
@@ -211,7 +216,7 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
             spinList.add(0, getString(R.string.item_spinner_empty));
         }
 
-        if(mCategoryAdapter == null) {
+        if (mCategoryAdapter == null) {
             mCategoryAdapter = new ArrayAdapter<String>(sActivity, R.layout.view_spinner_item_layout, spinList) {
                 public View getDropDownView(int position, View convertView, ViewGroup parent) {
                     View v = super.getDropDownView(position, convertView, parent);
@@ -260,105 +265,105 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);        
+        super.onActivityResult(requestCode, resultCode, intent);
 
         switch (requestCode) {
-        case REQ_CAMERA_TAKE_PIC: {
-            if (Activity.RESULT_OK == resultCode) {
-                try {
+            case REQ_CAMERA_TAKE_PIC: {
+                if (Activity.RESULT_OK == resultCode) {
+                    try {
                     /* Restore to original icon */
+                        mIvAddPhoto.setImageResource(R.drawable.selector_add_photo_status);
+                        Utility.releaseBitmaps(mNewestBitmap);
+                        mNewestBitmap = null;
+
+                        mNewestBitmap = BitmapFactory.decodeFile(FileUtility.TEMP_PHOTO_FILE.getAbsolutePath(), mOptions);
+                    } catch (OutOfMemoryError e) {
+                        e.printStackTrace();
+                        System.gc();
+                    }
+
+                    if (mNewestBitmap != null) {
+                        mCropImgDialog = new CropImageDialog(sActivity, mNewestBitmap, this);
+
+                        mCropImgDialog.show();
+                    }
+                }
+            }
+            break;
+            case REQ_SELECT_PICTURE: {
+                if (Activity.RESULT_OK == resultCode && intent != null && intent.getData() != null) {
+                /* Restore to original icon */
                     mIvAddPhoto.setImageResource(R.drawable.selector_add_photo_status);
                     Utility.releaseBitmaps(mNewestBitmap);
                     mNewestBitmap = null;
 
-                    mNewestBitmap = BitmapFactory.decodeFile(FileUtility.TEMP_PHOTO_FILE.getAbsolutePath(), mOptions);
-                } catch (OutOfMemoryError e) {
-                    e.printStackTrace();
-                    System.gc();
-                }
+                    Uri selectedImageUri = intent.getData();
+                    String selectedImagePath = Utility.getPathFromUri(selectedImageUri);
 
-                if (mNewestBitmap != null) {
+                     /* FIXME: duplicate decode image */
+                    try {
+                        if (selectedImagePath != null) {
+                            mNewestBitmap = BitmapFactory.decodeFile(selectedImagePath, mOptions);
+                        }
+                    } catch (OutOfMemoryError e) {
+                    /* A workaround to avoid the OOM */
+                        e.printStackTrace();
+                        System.gc();
+                    }
+
+                /* Error handling */
+                    if (mNewestBitmap != null) {
                         mCropImgDialog = new CropImageDialog(sActivity, mNewestBitmap, this);
 
                         mCropImgDialog.show();
-                }
-            }
-        }
-            break;
-        case REQ_SELECT_PICTURE: {
-            if (Activity.RESULT_OK == resultCode && intent != null && intent.getData() != null) {
-                /* Restore to original icon */
-                mIvAddPhoto.setImageResource(R.drawable.selector_add_photo_status);
-                Utility.releaseBitmaps(mNewestBitmap);
-                mNewestBitmap = null;
-
-                Uri selectedImageUri = intent.getData();
-                String selectedImagePath = Utility.getPathFromUri(selectedImageUri);
-
-                /* FIXME: duplicate decode image */
-                try {
-                    if (selectedImagePath != null) {
-                        mNewestBitmap = BitmapFactory.decodeFile(selectedImagePath, mOptions);
                     }
-                } catch (OutOfMemoryError e) {
-                    /* A workaround to avoid the OOM */
-                    e.printStackTrace();
-                    System.gc();
-                }
-
-                /* Error handling */
-                if (mNewestBitmap != null) {
-                    mCropImgDialog = new CropImageDialog(sActivity, mNewestBitmap, this);
-
-                    mCropImgDialog.show();
                 }
             }
-        }
             break;
-        case IntentIntegrator.REQUEST_CODE: {
+            case IntentIntegrator.REQUEST_CODE: {
             /* For barcode scanner */
-            IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+                IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 
-            if (scanResult != null) {
-                String barcode = scanResult.getContents();
-                String barcodeFormat = scanResult.getFormatName();
+                if (scanResult != null) {
+                    String barcode = scanResult.getContents();
+                    String barcodeFormat = scanResult.getFormatName();
 
-                if (barcode != null && barcodeFormat != null) {
-                    try {
+                    if (barcode != null && barcodeFormat != null) {
+                        try {
                         /* Restore to default */
-                        mBarcode = "";
-                        Drawable defaultBarcodeImg = getResources().getDrawable(R.drawable.selector_barcode);
+                            mBarcode = "";
+                            Drawable defaultBarcodeImg = getResources().getDrawable(R.drawable.selector_barcode);
 
-                        defaultBarcodeImg.setBounds(0, 0, defaultBarcodeImg.getIntrinsicWidth(),
-                                defaultBarcodeImg.getIntrinsicHeight());
-                        mTvBarcode.setText("x xxxxxx xxxxxx x");
-                        mTvBarcode.setCompoundDrawables(null, defaultBarcodeImg, null, null);
-                        Utility.releaseBitmaps(mBarcodeBitmap);
-                        mBarcodeBitmap = null;
+                            defaultBarcodeImg.setBounds(0, 0, defaultBarcodeImg.getIntrinsicWidth(),
+                                    defaultBarcodeImg.getIntrinsicHeight());
+                            mTvBarcode.setText("x xxxxxx xxxxxx x");
+                            mTvBarcode.setCompoundDrawables(null, defaultBarcodeImg, null, null);
+                            Utility.releaseBitmaps(mBarcodeBitmap);
+                            mBarcodeBitmap = null;
 
-                        mBarcode = barcode;
-                        mBarcodeFormat = barcodeFormat;
-                        mBarcodeBitmap = BarCodeUtility.encodeAsBitmap(barcode,
-                                BarcodeFormat.valueOf(mBarcodeFormat), 600, 300);
-                        Drawable barcodeDrawable = new BitmapDrawable(getResources(), mBarcodeBitmap);
+                            mBarcode = barcode;
+                            mBarcodeFormat = barcodeFormat;
+                            mBarcodeBitmap = BarCodeUtility.encodeAsBitmap(barcode,
+                                    BarcodeFormat.valueOf(mBarcodeFormat), 600, 300);
+                            Drawable barcodeDrawable = new BitmapDrawable(getResources(), mBarcodeBitmap);
 
-                        barcodeDrawable.setBounds(0, 0, barcodeDrawable.getIntrinsicWidth(),
-                                barcodeDrawable.getIntrinsicHeight());
-                        mTvBarcode.setText(barcode);
-                        mTvBarcode.setCompoundDrawables(null, barcodeDrawable, null, null);
-                        new AutoFillTask().execute(mBarcodeFormat, mBarcode);
-                    } catch (WriterException e) {
-                        e.printStackTrace();
+                            barcodeDrawable.setBounds(0, 0, barcodeDrawable.getIntrinsicWidth(),
+                                    barcodeDrawable.getIntrinsicHeight());
+                            mTvBarcode.setText(barcode);
+                            mTvBarcode.setCompoundDrawables(null, barcodeDrawable, null, null);
+                            new AutoFillTask().execute(mBarcodeFormat, mBarcode);
+                        } catch (WriterException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
-        }
             break;
         }
     }
 
     private void clearUserData() {
-        if(mTvPurchaceDate == null || mTvValidDate == null
+        if (mTvPurchaceDate == null || mTvValidDate == null
                 || mIvAddPhoto == null || mActMaterialName == null
                 || mActMaterialPlace == null || mActComment == null
                 || mEtNotificationDays == null || mTvBarcode == null) {
@@ -372,8 +377,7 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
         mBarcode = "";
         mBarcodeFormat = "";
 
-        defaultBarcodeImg
-                .setBounds(0, 0, defaultBarcodeImg.getIntrinsicWidth(), defaultBarcodeImg.getIntrinsicHeight());
+        defaultBarcodeImg.setBounds(0, 0, defaultBarcodeImg.getIntrinsicWidth(), defaultBarcodeImg.getIntrinsicHeight());
 
         /* set the default time */
         mTvPurchaceDate.setText(Utility.transDateToString(mPurchaceDate.getTime()));
@@ -408,7 +412,7 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
             isAllow = isAllow && false;
         }
 
-        if(sMaterialNameErrorPattern.matcher(materialName).matches()) {
+        if (sMaterialNameErrorPattern.matcher(materialName).matches()) {
             msg.append(sActivity.getString(R.string.msg_error_special_material_naming));
             isAllow = isAllow && false;
         }
@@ -433,7 +437,7 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
                     mInputDialog.setShowState(false);
                     initSpinnerData();
 
-                    int index = ((ArrayAdapter<String>)mSpinMaterialCategory.getAdapter()).getPosition(input);
+                    int index = ((ArrayAdapter<String>) mSpinMaterialCategory.getAdapter()).getPosition(input);
                     mSpinMaterialCategory.setSelection(index);
                 } else if (mMultiChoiceDialog != null && mMultiChoiceDialog.isDialogShowing()) {
                     final String[] selectedItems = mMultiChoiceDialog.getSelectedItemsString();
@@ -467,11 +471,11 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
                     subDialog.show();
                 } else if (mCropImgDialog != null && mCropImgDialog.isDialogShowing()) {
                     /* Recycle the original bitmap from camera intent extra. */
-                    if (mNewestBitmap != null && !mNewestBitmap.isRecycled()) {
-                        mIvAddPhoto.setImageResource(R.drawable.selector_add_photo_status);
-                        Utility.releaseBitmaps(mNewestBitmap);
-                        mNewestBitmap = null;
-                    }
+
+                    mIvAddPhoto.setImageResource(R.drawable.selector_add_photo_status);
+                    Utility.releaseBitmaps(mNewestBitmap);
+                    mNewestBitmap = null;
+
 
                     Bitmap bitmap = mCropImgDialog.getCroppedImage();
                     mNewestBitmap = bitmap;
@@ -480,7 +484,7 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
                     mCropImgDialog.setShowState(false);
                 }
             } else if (AlertDialog.BUTTON_NEGATIVE == which) {
-                if (mCropImgDialog != null && mNewestBitmap != null && !mNewestBitmap.isRecycled()) {
+                if (mCropImgDialog != null) {
                     mIvAddPhoto.setImageResource(R.drawable.selector_add_photo_status);
                     Utility.releaseBitmaps(mNewestBitmap);
                     mNewestBitmap = null;
@@ -526,28 +530,28 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
         int id = v.getId();
 
         switch (id) {
-        case R.id.rl_purchace_date_layout:
-        case R.id.rl_validate_date_layout: {
-            mCurPressDateBtnId = id;
-            Calendar calendar = Calendar.getInstance();
-            mDatePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+            case R.id.rl_purchace_date_layout:
+            case R.id.rl_validate_date_layout: {
+                mCurPressDateBtnId = id;
+                Calendar calendar = Calendar.getInstance();
+                mDatePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
-            mDatePickerDialog.show(getActivity().getFragmentManager(), DATEPICKER_TAG);
-        }
+                mDatePickerDialog.show(getActivity().getFragmentManager(), DATEPICKER_TAG);
+            }
             break;
 
-        case R.id.tv_barcode: {
-            IntentIntegrator integrator = new IntentIntegrator(LoginMaterialFragment.this);
-            integrator.initiateScan();
-        }
+            case R.id.tv_barcode: {
+                IntentIntegrator integrator = new IntentIntegrator(LoginMaterialFragment.this);
+                integrator.initiateScan();
+            }
             break;
-        case R.id.iv_add_photo: {
-            mSelectPhotoDialog = new SelectPhotoDialog(sActivity, getString(R.string.title_select_photo), new String[] {
-                    getString(R.string.title_select_photo_from_album),
-                    getString(R.string.title_select_photo_from_camera) }, this);
+            case R.id.iv_add_photo: {
+                mSelectPhotoDialog = new SelectPhotoDialog(sActivity, getString(R.string.title_select_photo), new String[]{
+                        getString(R.string.title_select_photo_from_album),
+                        getString(R.string.title_select_photo_from_camera)}, this);
 
-            mSelectPhotoDialog.show();
-        }
+                mSelectPhotoDialog.show();
+            }
             break;
         }
     }
@@ -561,7 +565,7 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
             }
         }
 
-        for(String text : mTextHistoryList) {
+        for (String text : mTextHistoryList) {
             textHistory.append(text);
             textHistory.append(":");
         }
@@ -576,7 +580,7 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
             return;
         }
 
-        if(data != null) {
+        if (data != null) {
             if (data.equals(ACTION_BAR_BTN_ACTION_ADD)) {
                 Material material = new Material();
                 String notificationDays = mEtNotificationDays.getText().toString().trim();
@@ -666,7 +670,7 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
 
         cal.set(year, monthOfYear, dayOfMonth);
 
-        if(mCurPressDateBtnId >= 0) {
+        if (mCurPressDateBtnId >= 0) {
             if (mCurPressDateBtnId == R.id.rl_purchace_date_layout) {
                 mPurchaceDate = cal;
                 mTvPurchaceDate.setText(Utility.transDateToString(cal.getTime()));
@@ -679,7 +683,7 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
         }
     }
 
-    private class AutoFillTask extends AsyncTask<String, Void, Material>{
+    private class AutoFillTask extends AsyncTask<String, Void, Material> {
         private Material mMaterialInfo;
 
         @Override
@@ -692,20 +696,20 @@ public class LoginMaterialFragment extends MMFragment implements Observer, OnIte
 
         @Override
         protected void onPostExecute(Material result) {
-            if(mMaterialInfo != null) {
+            if (mMaterialInfo != null) {
                 int selectedIndex = -1;
                 String type = mMaterialInfo.getMaterialType();
                 mNewestBitmap = mMaterialInfo.getMaterialPic();
 
-                for(int i = 0, count = mSpinMaterialCategory.getCount() ; i < count ; i++) {
-                    if(mSpinMaterialCategory.getItemAtPosition(i).equals(type)) {
+                for (int i = 0, count = mSpinMaterialCategory.getCount(); i < count; i++) {
+                    if (mSpinMaterialCategory.getItemAtPosition(i).equals(type)) {
                         selectedIndex = i;
                         break;
                     }
                 }
                 mIvAddPhoto.setImageBitmap(mNewestBitmap);
                 mActMaterialName.setText(mMaterialInfo.getName());
-                if(selectedIndex >= 0) {
+                if (selectedIndex >= 0) {
                     mSpinMaterialCategory.setSelection(selectedIndex);
                 }
                 mActMaterialPlace.setText(mMaterialInfo.getMaterialPlace());
