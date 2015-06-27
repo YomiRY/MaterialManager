@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
     <string name="title_notice_dialog">!!! 注意 !!!</string>
     <string name="title_positive_btn_label">确定</string>
     <string name="title_negative_btn_label">取消</string>
@@ -8,12 +9,6 @@
     <string name="data_progressing">数据处理中...</string>
     <string name="data_save_success">!!数据储存成功!!</string>
     <string name="data_save_fail">!!数据储存失败!!</string>
-    <string name="ga_app_view_login_material_fragment">过期物品输入页面 - LoginMaterialFragment</string>
-    <string name="ga_app_view_material_manager_fragment">过期物品管理页面 - MaterialManagerFragment</string>
-    <string name="ga_app_view_settings_fragment">设定页面 - SettingsFragment</string>
-    <string name="ga_app_view_grocery_list_login_fragment">登入购物清单 - LoginGroceryListFragment</string>
-    <string name="ga_app_view_grocery_list_fragment">检视购物清单列表 - GroceryListFragment</string>
-    <string name="ga_app_view_grocery_history_fragment">购物历史 - GroceryHistoryFragment</string>
     <string name="app_name">过期物品管家</string>
     <string name="title_login_material">登入物品</string>
     <string name="title_view_material">检视物品</string>
@@ -58,6 +53,9 @@
     <string name="global_search_rest_days_exp">%1$s天就過期</string>
     <string name="global_search_material_qty">數量:</string>
     <string name="global_search_material_price">單價:</string>
+    <string name="material_modify_actionbar_title">其他 - 过期物品修改</string>
+
+
     <string name="setting_activity_label">设定</string>
     <string name="title_tv_notification_types">过期通知型态</string>
     <string name="title_tv_notification_vibrate">震动</string>

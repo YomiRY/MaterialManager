@@ -84,6 +84,9 @@
     <string name="global_search_material_qty">Qty:</string>
     <string name="global_search_material_price">Price:</string>
 
+    <!-- MaterialModifyActivity -->
+    <string name="material_modify_actionbar_title">Other - Material Modification</string>
+
     <!-- SettingActivity -->
     <string name="setting_activity_label">Settings</string>
     <string name="title_tv_notification_types">Notification type</string>

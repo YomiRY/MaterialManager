@@ -12,9 +12,9 @@
     <bool name="ga_dryRun">false</bool>
 
     <!-- The screen names that will appear in reports -->
-    <string name="com.material.management.MainActivity">首頁 - MainActivity</string>
-    <string name="com.google.zxing.client.android.CaptureActivity">條碼掃描 - CaptureActivity</string>
-    <string name="com.material.management.StoreMapActivity">附近店家搜尋頁面 - StoreMapActivity</string>
-    <screenName name="com.material.management.GroceryItemLoginActivity">購買物品輸入 - GroceryItemLoginActivity</screenName>
-    <screenName name="com.material.management.GroceryListModifyActivity">修改購物清單 - GroceryListModifyActivity</screenName>
+    <!--<string name="com.material.management.MainActivity">首頁 - MainActivity</string>-->
+    <!--<string name="com.google.zxing.client.android.CaptureActivity">條碼掃描 - CaptureActivity</string>-->
+    <!--<string name="com.material.management.StoreMapActivity">附近店家搜尋頁面 - StoreMapActivity</string>-->
+    <!--<screenName name="com.material.management.GroceryItemLoginActivity">購買物品輸入 - GroceryItemLoginActivity</screenName>-->
+    <!--<screenName name="com.material.management.GroceryListModifyActivity">修改購物清單 - GroceryListModifyActivity</screenName>-->
 </resources>

@@ -3,8 +3,10 @@ package com.material.management.data;
 import java.util.Calendar;
 
 import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Material {
+public class Material implements Parcelable {
     public String getName() {
         return name == null ? "" : name;
     }
@@ -95,7 +97,6 @@ public class Material {
 
     public String getBarcode() {
         /* for database migration */
-//        barcode = (barcode == null) ? "" : barcode;
         return barcode == null ? "" : barcode;
     }
 
@@ -105,7 +106,6 @@ public class Material {
 
     public String getBarcodeFormat() {
         /* for database migration */
-//        barcodeFormat = (barcodeFormat == null) ? "" : barcodeFormat;
         return barcodeFormat == null ? "" : barcodeFormat;
     }
 
@@ -119,6 +119,60 @@ public class Material {
 
     public void setIsValidDateSetup(int isValidDateSetup) {
         this.isValidDateSetup = isValidDateSetup;
+    }
+
+    public static final Parcelable.Creator<Material> CREATOR = new Parcelable.Creator<Material>() {
+        public Material createFromParcel(Parcel p) {
+            return new Material(p);
+        }
+
+        @Override
+        public Material[] newArray(int size) {
+            return new Material[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(barcodeFormat);
+        dest.writeString(barcode);
+        dest.writeString(materialType);
+        dest.writeInt(isAsPhotoType);
+        dest.writeSerializable(purchaceDate);
+        dest.writeSerializable(validDate);
+        dest.writeInt(isValidDateSetup);
+        dest.writeInt(notificationDays);
+        dest.writeParcelable(materialPic, flags);
+        dest.writeString(materialPicPath);
+        dest.writeString(materialPlace);
+        dest.writeString(comment);
+        dest.writeString(resetDaysInfo);
+    }
+
+    public Material() {
+    }
+
+    Material(Parcel p) {
+        name = p.readString();
+        barcodeFormat = p.readString();
+        barcode = p.readString();
+        materialType = p.readString();
+        isAsPhotoType = p.readInt();
+        purchaceDate = (Calendar) p.readSerializable();
+        validDate = (Calendar) p.readSerializable();
+        isValidDateSetup = p.readInt();
+        notificationDays = p.readInt();
+        materialPic = p.readParcelable(Bitmap.class.getClassLoader());
+        materialPicPath = p.readString();
+        materialPlace = p.readString();
+        comment = p.readString();
+        resetDaysInfo = p.readString();
     }
 
     /* For global search usage. */

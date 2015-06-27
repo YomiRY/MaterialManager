@@ -26,5 +26,5 @@
     <screenName name="com.material.management.StoreMapActivity">附近店家搜尋頁面 - StoreMapActivity</screenName>
     <screenName name="com.material.management.GroceryItemLoginActivity">購買物品輸入 - GroceryItemLoginActivity</screenName>
     <screenName name="com.material.management.GroceryListModifyActivity">修改購物清單 - GroceryListModifyActivity</screenName>
-
+    <screenName name="com.material.management.GlobalSearchActivity">全域搜尋- GlobalSearchActivity</screenName>
 </resources>

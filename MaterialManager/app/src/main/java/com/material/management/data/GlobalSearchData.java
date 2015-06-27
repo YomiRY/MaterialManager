@@ -28,6 +28,8 @@ public class GlobalSearchData {
     private String mItemTotalCost = null;
     private String mItemRestExpDays = null;
     private boolean mIsHead = false;
+    private GroceryItem mGroceryItem = null;
+    private Material mMaterial = null;
 
     public String getItemCount() {
         return mItemCount;
@@ -83,5 +85,21 @@ public class GlobalSearchData {
 
     public void setTypeTitle(String title) {
         mTypeTitle = title;
+    }
+
+    public Material getMaterial() {
+        return mMaterial;
+    }
+
+    public void setMaterial(Material mMaterial) {
+        this.mMaterial = mMaterial;
+    }
+
+    public GroceryItem getGroceryItem() {
+        return mGroceryItem;
+    }
+
+    public void setGroceryItem(GroceryItem mGroceryItem) {
+        this.mGroceryItem = mGroceryItem;
     }
 }

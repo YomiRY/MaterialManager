@@ -2,6 +2,7 @@ package com.material.management;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -33,8 +35,9 @@ public class GlobalSearchActivity extends MMActivity {
     private ListView mLvContentListView;
     private EditText mEtSearchText;
 
-    GlobalDataLoaderTask mGlobalDataLoaderTask = null;
-    ShortCutSearchListAdapter mSearchResultAdapter = null;
+    private GlobalDataLoaderTask mGlobalDataLoaderTask = null;
+    private ShortCutSearchListAdapter mSearchResultAdapter = null;
+    private String mKeyword = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,16 @@ public class GlobalSearchActivity extends MMActivity {
     protected void onStart() {
         GoogleAnalytics.getInstance(this).reportActivityStart(this);
         super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        if(mKeyword != null && !mKeyword.isEmpty()) {
+            mGlobalDataLoaderTask = new GlobalDataLoaderTask(mKeyword);
+
+            mGlobalDataLoaderTask.execute();
+        }
+        super.onResume();
     }
 
     @Override
@@ -84,31 +97,41 @@ public class GlobalSearchActivity extends MMActivity {
                     mGlobalDataLoaderTask = null;
                 }
 
-                if(s.toString().isEmpty()) {
+                mKeyword = s.toString();
+
+                if(mKeyword.isEmpty()) {
                     mSearchResultAdapter.clear();
                     mSearchResultAdapter.notifyDataSetChanged();
-                    return;
+                } else {
+                    mGlobalDataLoaderTask = new GlobalDataLoaderTask(mKeyword);
+
+                    mGlobalDataLoaderTask.execute();
                 }
-
-                mGlobalDataLoaderTask = new GlobalDataLoaderTask(s.toString());
-
-                mGlobalDataLoaderTask.execute();
             }
 
             @Override
             public void afterTextChanged(Editable s) {}
         });
+
+        mLvContentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+                GlobalSearchData searchData = (GlobalSearchData) mSearchResultAdapter.getItem(pos);
+                GlobalSearchData.ItemType type = searchData.getItemType();
+                Intent intent = new Intent();
+
+                if(type == GlobalSearchData.ItemType.MATERIAL_ITEM) {
+                    intent.setClass(GlobalSearchActivity.this, MaterialModifyActivity.class);
+                    intent.putExtra("material_item", searchData.getMaterial());
+                } else if (type == GlobalSearchData.ItemType.GROCERY_ITEM) {
+                    intent.setClass(GlobalSearchActivity.this, GroceryItemLoginActivity.class);
+                    intent.putExtra("grocery_item", searchData.getGroceryItem());
+                }
+                startActivity(intent);
+            }
+        });
+
         mIbHideKeyboard.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        super.onClick(v);
-        int id = v.getId();
-
-        if(id == R.id.ib_finish_btn) {
-            hideKeyboard(v);
-        }
     }
 
     @Override
@@ -169,6 +192,7 @@ public class GlobalSearchActivity extends MMActivity {
                     searchData.setItemType(GlobalSearchData.ItemType.MATERIAL_ITEM);
                     searchData.setItemName(name);
                     searchData.setItemRestExpDays(restExpDays);
+                    searchData.setMaterial(material);
                     mGlobalSearchDataList.add(searchData);
                 }
             }
@@ -185,6 +209,7 @@ public class GlobalSearchActivity extends MMActivity {
                     searchData.setItemName(name);
                     searchData.setItemCount(groceryItem.getQty());
                     searchData.setItemTotalCost(getString(R.string.global_search_total_cost, Double.toString(totalCost)));
+                    searchData.setGroceryItem(groceryItem);
                     mGlobalSearchDataList.add(searchData);
                 }
             }

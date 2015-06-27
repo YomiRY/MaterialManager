@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <!--Common-->
     <string name="title_notice_dialog">!!! 注意 !!!</string>
@@ -11,13 +11,6 @@
     <string name="data_progressing">資料處理中...</string>
     <string name="data_save_success">!!資料儲存成功!!</string>
     <string name="data_save_fail">!!資料儲存失敗!!</string>
-
-    <string name="ga_app_view_login_material_fragment">過期物品輸入頁面 - LoginMaterialFragment</string>
-    <string name="ga_app_view_material_manager_fragment">過期物品管理頁面 - MaterialManagerFragment</string>
-    <string name="ga_app_view_settings_fragment">設定頁面 - SettingsFragment</string>
-    <string name="ga_app_view_grocery_list_login_fragment">登入購物清單 - LoginGroceryListFragment</string>
-    <string name="ga_app_view_grocery_list_fragment">檢視購物清單列表 - GroceryListFragment</string>
-    <string name="ga_app_view_grocery_history_fragment">購物歷史 - GroceryHistoryFragment</string>
 
     <!-- MainActivity -->
     <string name="app_name">過期物品管家</string>
@@ -73,6 +66,9 @@
     <string name="global_search_rest_days_exp">%1$s天就過期</string>
     <string name="global_search_material_qty">數量:</string>
     <string name="global_search_material_price">單價:</string>
+
+    <!-- MaterialModifyActivity -->
+    <string name="material_modify_actionbar_title">其他 - 過期物品修改</string>
 
     <!-- SettingActivity -->
     <string name="setting_activity_label">設定</string>

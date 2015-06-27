@@ -233,6 +233,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.material.management.GlobalSearchActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.material.management.MaterialModifyActivity"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name="com.material.management.provider.MaterialProvider"
