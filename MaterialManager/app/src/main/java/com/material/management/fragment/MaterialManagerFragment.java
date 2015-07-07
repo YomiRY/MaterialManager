@@ -9,17 +9,11 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -38,56 +32,44 @@ import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
-
 import com.android.datetimepicker.date.DatePickerDialog;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.material.management.MMFragment;
 import com.material.management.MainActivity;
+import com.material.management.MaterialModifyActivity;
 import com.material.management.Observer;
 import com.material.management.R;
 import com.material.management.dialog.BarcodeDialog;
-import com.material.management.dialog.CropImageDialog;
 import com.material.management.dialog.MaterialMenuDialog;
-import com.material.management.dialog.MaterialModifyDialog;
 import com.material.management.component.RoundedImageView;
 import com.material.management.data.BundleInfo;
 import com.material.management.data.Material;
 import com.material.management.data.StreamItem;
 import com.material.management.interf.ISearchUpdate;
 import com.material.management.utils.DBUtility;
-import com.material.management.utils.FileUtility;
 import com.material.management.utils.Utility;
 import com.picasso.Callback;
 import com.picasso.Picasso;
 
 public class MaterialManagerFragment extends MMFragment implements Observer, SearchView.OnQueryTextListener,
         OnItemClickListener, DialogInterface.OnClickListener, DatePickerDialog.OnDateSetListener {
-    private static final int REQ_CAMERA_TAKE_PIC = 1;
-    private static final int REQ_SELECT_PICTURE = 2;
     private static final String DATEPICKER_TAG = "datepicker";
-    private static MainActivity sActivity;
 
-    private int mMaterialTypGridNum = -1;
-    private GridView mGvMaterialType;
-    private StreamAdapter mMaterialTypeAdapter;
-    private String mSearchString = null;
-    private Locale mLocale = null;
-    private int mSelectedPosition;
     private View mLayout;
+    private GridView mGvMaterialType;
+
+    private Locale mLocale = null;
     private MaterialMenuDialog mMaterialMenu = null;
     private AlertDialog mMaterialMenuDialog = null;
-    private MaterialModifyDialog mMaterialModifyDialog = null;
-    private CropImageDialog mCropImgDialog;
+    private DatePickerDialog mDatePickerDialog = null;
     private BarcodeDialog mBarcodeDialog;
+    private StreamAdapter mMaterialTypeAdapter;
     private Options mOptions = new Options();
-    /* used for tracking original and cropped image resource so that it can be release in time */
-    private Bitmap mNewestBitmap = null;
-    /* The variables are for MaterialManagement first create.*/
     private Object mData = null;
     private Material mSelectedMaterial = null;
-    /* For set up valid date for imported grocery item. */
-    private DatePickerDialog mDatePickerDialog = null;
+    private String mSearchString = null;
+    private int mSelectedPosition;
+    private int mMaterialTypGridNum = -1;
+    private boolean mIsNeedResumeRefresh = false;
 
 
     @Override
@@ -96,7 +78,6 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
 
         mLayout = inflater.inflate(R.layout.fragment_material_manager_layout, container, false);
         mLocale = Locale.getDefault();
-        sActivity = (MainActivity) getActivity();
         mOptions.inPurgeable = true;
         mOptions.inInputShareable = true;
         mOptions.inScaled = false;
@@ -111,6 +92,19 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
     @Override
     public void onResume() {
         sendScreenAnalytics(getString(R.string.ga_app_view_material_manager_fragment));
+
+        ListAdapter adapter = mGvMaterialType.getAdapter();
+
+        if(adapter != null && (adapter instanceof MaterialAdapter) && mIsNeedResumeRefresh) {
+            String materialType = mSelectedMaterial.getMaterialType();
+            Bundle bundle = new Bundle();
+
+            bundle.putString(BundleInfo.BUNDLE_KEY_MATERIAL_TYPE, materialType);
+            bundle.putString(BundleInfo.BUNDLE_KEY_MATERIAL_NAME, null);
+            update(bundle);
+        }
+        mIsNeedResumeRefresh = false;
+
         super.onResume();
     }
 
@@ -125,14 +119,10 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
         mMaterialTypeAdapter = null;
         mSearchString = null;
         mLocale = null;
-        sActivity = null;
         mLayout = null;
         mMaterialMenu = null;
         mMaterialMenuDialog = null;
-        mMaterialModifyDialog = null;
         mBarcodeDialog = null;
-
-        Utility.releaseBitmaps(mNewestBitmap);
 
         super.onDestroyView();
     }
@@ -182,7 +172,7 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
                 items.add(getString(R.string.title_menu_item_set_up_valid_date));
             }
         }
-        mMaterialMenu = new MaterialMenuDialog(sActivity, getString(R.string.title_menu_head),
+        mMaterialMenu = new MaterialMenuDialog(mOwnerActivity, getString(R.string.title_menu_head),
                 items.toArray(new String[0]), this);
 
         mMaterialMenuDialog = mMaterialMenu.show();
@@ -241,16 +231,20 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
                 materialItem.setIsAsPhotoType(1);
                 DBUtility.updateMaterialIsAsPhotoType(materialItem);
                 showToast(getString(R.string.msg_set_as_face_success));
-            } else if (isModify) {
-                mMaterialModifyDialog = new MaterialModifyDialog(this, materialItem, this);
-                mMaterialModifyDialog.show();
-                isNeedRefresh = true;
-            } else if (isViewBarcode) {
+            }
+            else if (isModify) {
+                Intent intent = new Intent(mOwnerActivity, MaterialModifyActivity.class);
+                mIsNeedResumeRefresh = true;
+
+                intent.putExtra("material_item", mSelectedMaterial);
+                startActivity(intent);
+            }
+            else if (isViewBarcode) {
                 String barcode = materialItem.getBarcode();
                 String barcodeFormat = materialItem.getBarcodeFormat();
 
                 if ((barcode != null && !barcode.isEmpty()) && (barcodeFormat != null && !barcodeFormat.isEmpty())) {
-                    mBarcodeDialog = new BarcodeDialog(sActivity, this);
+                    mBarcodeDialog = new BarcodeDialog(mOwnerActivity, this);
 
                     mBarcodeDialog.setShowState(true);
                     mBarcodeDialog.setBarcode(barcodeFormat, barcode);
@@ -297,37 +291,6 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
             if (mBarcodeDialog != null && mBarcodeDialog.isDialogShowing()) {
                 mBarcodeDialog.setShowState(false);
             }
-
-            if (mCropImgDialog != null && mCropImgDialog.isDialogShowing()) {
-                Utility.releaseBitmaps(mNewestBitmap);
-                mNewestBitmap = null;
-                mNewestBitmap = mCropImgDialog.getCroppedImage();
-
-                if (mMaterialModifyDialog != null && mMaterialModifyDialog.isShowing()) {
-                    /* TODO: Need to modify the update and insert db flow by pic path not by bitmap */
-                    Bitmap tmp = mSelectedMaterial.getMaterialPic();
-
-                    mSelectedMaterial.setMaterialPic(mNewestBitmap);
-                    mMaterialModifyDialog.setCameraPic(null);
-                    mMaterialModifyDialog.setCameraPic(mNewestBitmap);
-                    Utility.releaseBitmaps(tmp);
-                }
-                mCropImgDialog.setShowState(false);
-            } else if (mMaterialModifyDialog != null && mMaterialModifyDialog.isShowing()) {
-                Material newMaterial = mMaterialModifyDialog.getUpdatedMaterialInfo();
-                Material oldMaterial = mMaterialModifyDialog.getOldMaterialInfo();
-
-                DBUtility.deleteMaterialInfo(oldMaterial);
-                DBUtility.insertMaterialInfo(newMaterial);
-                mMaterialModifyDialog.setShowState(false);
-                Picasso.with(mOwnerActivity).clearCache();
-
-                update(null);
-                mMaterialTypeAdapter.triggerSelectMaterialType(oldMaterial.getMaterialType(), null);
-            }
-        } else {
-            Utility.releaseBitmaps(mNewestBitmap);
-            mNewestBitmap = null;
         }
         dialog.dismiss();
     }
@@ -353,8 +316,6 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
 
         for (Material materialInfo : materialInfos) {
             boolean isExpired = checkIsExpired(materialInfo);
-//            StreamItem item = new StreamItem(getActivity(), materialInfo.getMaterialPicPath(),
-//                    materialInfo.getMaterialType(), materialInfo.getIsAsPhotoType(), isExpired);
             StreamItem item = new StreamItem(getActivity(), materialInfo.getMaterialPicPath(),
                     materialInfo.getMaterialType(), materialInfo.getIsAsPhotoType(), isExpired);
 
@@ -389,18 +350,20 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
     public void update(Object data) {
         mData = data;
 
-        if (sActivity == null) {
+        if (mOwnerActivity == null) {
             return;
         }
-        sActivity.setMenuItemVisibility(R.id.action_search, true);
-        sActivity.setMenuItemVisibility(R.id.menu_action_add, false);
-        sActivity.setMenuItemVisibility(R.id.menu_action_cancel, false);
-        sActivity.setMenuItemVisibility(R.id.menu_sort_by_date, false);
-        sActivity.setMenuItemVisibility(R.id.menu_sort_by_name, false);
-        sActivity.setMenuItemVisibility(R.id.menu_sort_by_place, false);
-        sActivity.setMenuItemVisibility(R.id.menu_grid_1x1, true);
-        sActivity.setMenuItemVisibility(R.id.menu_grid_2x1, true);
-        sActivity.setMenuItemVisibility(R.id.menu_clear_expired_items, false);
+        MainActivity mainActivity = (MainActivity) mOwnerActivity;
+
+        mainActivity.setMenuItemVisibility(R.id.action_search, true);
+        mainActivity.setMenuItemVisibility(R.id.menu_action_add, false);
+        mainActivity.setMenuItemVisibility(R.id.menu_action_cancel, false);
+        mainActivity.setMenuItemVisibility(R.id.menu_sort_by_date, false);
+        mainActivity.setMenuItemVisibility(R.id.menu_sort_by_name, false);
+        mainActivity.setMenuItemVisibility(R.id.menu_sort_by_place, false);
+        mainActivity.setMenuItemVisibility(R.id.menu_grid_1x1, true);
+        mainActivity.setMenuItemVisibility(R.id.menu_grid_2x1, true);
+        mainActivity.setMenuItemVisibility(R.id.menu_clear_expired_items, false);
 
         ArrayList<Material> materialInfos = DBUtility.selectMaterialInfos();
 
@@ -540,8 +503,6 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
 
             final StreamItem item = getItem(position);
             RoundedImageView roundedImgView = ((RoundedImageView) view.findViewById(R.id.iv_rounded_view_pic));
-
-//          roundedImgView.setImageBitmap(item.getMaterialPicPath());
             final RelativeLayout rlOnLoading = (RelativeLayout) view.findViewById(R.id.rl_on_loading);
 
             rlOnLoading.setVisibility(View.VISIBLE);
@@ -586,6 +547,8 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
         }
 
         public void triggerSelectMaterialType(String materialType, String searchString) {
+            MainActivity activity = (MainActivity) mOwnerActivity;
+
             /* use 1 x 1 grid view to display material items */
             // setMaterialTypeGridColumnNum(1);
             mGvMaterialType.setNumColumns(1);
@@ -594,18 +557,18 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
             mMaterialAdapter.addAll(mTypeMaterialMap.get(materialType));
             mGvMaterialType.setAdapter(mMaterialAdapter);
             mMaterialAdapter.refreshSearch(searchString);
-            sActivity.changeHomeAsUpIcon(R.drawable.ic_ab_back_holo_dark_am);
+            activity.changeHomeAsUpIcon(R.drawable.ic_ab_back_holo_dark_am);
 
-            if (sActivity != null) {
-                sActivity.setMenuItemVisibility(R.id.action_search, true);
-                sActivity.setMenuItemVisibility(R.id.menu_action_add, false);
-                sActivity.setMenuItemVisibility(R.id.menu_action_cancel, false);
-                sActivity.setMenuItemVisibility(R.id.menu_sort_by_date, true);
-                sActivity.setMenuItemVisibility(R.id.menu_sort_by_name, true);
-                sActivity.setMenuItemVisibility(R.id.menu_sort_by_place, true);
-                sActivity.setMenuItemVisibility(R.id.menu_grid_1x1, false);
-                sActivity.setMenuItemVisibility(R.id.menu_grid_2x1, false);
-                sActivity.setMenuItemVisibility(R.id.menu_clear_expired_items, false);
+            if (activity != null) {
+                activity.setMenuItemVisibility(R.id.action_search, true);
+                activity.setMenuItemVisibility(R.id.menu_action_add, false);
+                activity.setMenuItemVisibility(R.id.menu_action_cancel, false);
+                activity.setMenuItemVisibility(R.id.menu_sort_by_date, true);
+                activity.setMenuItemVisibility(R.id.menu_sort_by_name, true);
+                activity.setMenuItemVisibility(R.id.menu_sort_by_place, true);
+                activity.setMenuItemVisibility(R.id.menu_grid_1x1, false);
+                activity.setMenuItemVisibility(R.id.menu_grid_2x1, false);
+                activity.setMenuItemVisibility(R.id.menu_clear_expired_items, false);
             }
             mMaterialAdapter.notifyDataSetChanged();
         }
@@ -801,7 +764,6 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
 
             viewHolder.restDay.setSelected(true);
             viewHolder.noValidDate.setSelected(true);
-//            ivMaterialPic.setOnClickListener(null);
             viewHolder.onnLoading.setVisibility(View.VISIBLE);
             Picasso.with(mOwnerActivity).cancelRequest(viewHolder.materialPic);
             Picasso.with(mOwnerActivity).load(new File(item.getMaterialPicPath())).centerCrop().resize(mScaledSize, mScaledSize).into(viewHolder.materialPic, new Callback() {
@@ -811,9 +773,6 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
                     viewHolder.materialPic.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
-//                            Bitmap bmp = ((BitmapDrawable) ivMaterialPic.getDrawable()).getBitmap();
-//                            LogUtility.printLogD("yomi", "Material pic onClick triggled....");
-//                            AnimatorUtility.zoomInAnimation(mOwnerActivity, view, ivMaterialPic, ivExpandPic, bmp);
                         }
                     });
                 }
@@ -857,7 +816,7 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
             if (item.getIsValidDateSetup() == 1) {
                 viewHolder.noValidDate.setVisibility(View.GONE);
                 /* if material has been expired, then change the text color as red. */
-                if (restDay.equals(sActivity.getResources().getString(R.string.msg_expired))) {
+                if (restDay.equals(mResources.getString(R.string.msg_expired))) {
                 /* View item maybe cached before, so we need to re-assign the background color */
                     viewHolder.restDay.setVisibility(View.GONE);
                     viewHolder.unit.setVisibility(View.GONE);
@@ -927,7 +886,7 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
                     c1.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONTH), c1.get(Calendar.DAY_OF_MONTH));
                     c2.set(c3.get(Calendar.YEAR), c3.get(Calendar.MONTH), c3.get(Calendar.DAY_OF_MONTH));
                     long daysDiff = (c2.getTimeInMillis() - c1.getTimeInMillis()) / (24 * 60 * 60 * 1000);
-                    reset_days_str = (daysDiff <= 0) ? sActivity.getResources().getString(R.string.msg_expired) : Long
+                    reset_days_str = (daysDiff <= 0) ? mResources.getString(R.string.msg_expired) : Long
                             .toString(daysDiff);
                     item.setResetDaysInfo(reset_days_str);
                 }
@@ -957,7 +916,7 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
                     c1.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONTH), c1.get(Calendar.DAY_OF_MONTH));
                     c2.set(c3.get(Calendar.YEAR), c3.get(Calendar.MONTH), c3.get(Calendar.DAY_OF_MONTH));
                     long daysDiff = (c2.getTimeInMillis() - c1.getTimeInMillis()) / (24 * 60 * 60 * 1000);
-                    reset_days_str = (daysDiff <= 0) ? sActivity.getResources().getString(R.string.msg_expired) : Long
+                    reset_days_str = (daysDiff <= 0) ? mResources.getString(R.string.msg_expired) : Long
                             .toString(daysDiff);
                     item.setResetDaysInfo(reset_days_str);
 
@@ -999,73 +958,5 @@ public class MaterialManagerFragment extends MMFragment implements Observer, Sea
     public boolean onQueryTextSubmit(String query) {
 
         return false;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-
-        switch (requestCode) {
-            case REQ_CAMERA_TAKE_PIC: {
-                if (Activity.RESULT_OK == resultCode) {
-                    Bitmap bitmap = null;
-                    try {
-                        bitmap = BitmapFactory.decodeFile(FileUtility.TEMP_PHOTO_FILE.getAbsolutePath(), mOptions);
-                    } catch (OutOfMemoryError e) {
-                        e.printStackTrace();
-                        System.gc();
-                    }
-
-                    if (bitmap != null) {
-                        mCropImgDialog = new CropImageDialog(sActivity, bitmap, this);
-
-                        mCropImgDialog.show();
-                    }
-                }
-            }
-            break;
-
-            case REQ_SELECT_PICTURE: {
-                if (Activity.RESULT_OK == resultCode && intent != null) {
-                    Uri selectedImageUri = intent.getData();
-                    String selectedImagePath = Utility.getPathFromUri(selectedImageUri);
-                    Bitmap bitmap = null;
-
-                    if (selectedImagePath != null) {
-                        try {
-                            bitmap = BitmapFactory.decodeFile(selectedImagePath, mOptions);
-                        } catch (OutOfMemoryError e) {
-                            e.printStackTrace();
-                            System.gc();
-                        }
-                    } else {
-                        bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.ic_no_image_available)).getBitmap();
-                    }
-
-                    /* Error handling */
-                    if (bitmap != null) {
-                        mCropImgDialog = new CropImageDialog(sActivity, bitmap, this);
-
-                        mCropImgDialog.show();
-                    }
-                }
-            }
-            break;
-            case IntentIntegrator.REQUEST_CODE: {
-            /* For barcode scanner */
-                IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-
-                if (mMaterialModifyDialog != null && scanResult != null) {
-                    String barcodeFormat = scanResult.getFormatName();
-                    String barcodeContent = scanResult.getContents();
-
-                    if (barcodeFormat != null && barcodeContent != null) {
-                        mMaterialModifyDialog.setBarcodeInfo(null, null);
-                        mMaterialModifyDialog.setBarcodeInfo(scanResult.getFormatName(), scanResult.getContents());
-                    }
-                }
-            }
-            break;
-        }
     }
 }

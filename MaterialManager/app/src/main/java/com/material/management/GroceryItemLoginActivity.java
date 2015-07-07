@@ -415,7 +415,7 @@ public class GroceryItemLoginActivity extends MMActivity implements DialogInterf
                     updateTextHistory(groceryItem.getName(), groceryItem.getComment());
                     clearUserData();
                     showToast(getString(R.string.data_save_success));
-
+                    finish();
                 } else {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(this, R.style.AlertDialogTheme);
 
@@ -454,14 +454,18 @@ public class GroceryItemLoginActivity extends MMActivity implements DialogInterf
     protected void onPause() {
         super.onPause();
 
-        GoogleAnalytics.getInstance(this).reportActivityStop(this);
-
         if (mCropImgDialog != null && mCropImgDialog.isDialogShowing())
             mCropImgDialog.setShowState(false);
         if (mInputDialog != null && mInputDialog.isDialogShowing())
             mInputDialog.setShowState(false);
         if (mMultiChoiceDialog != null && mMultiChoiceDialog.isDialogShowing())
             mMultiChoiceDialog.setShowState(false);
+    }
+
+    @Override
+    protected void onStop() {
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
+        super.onStop();
     }
 
     @Override

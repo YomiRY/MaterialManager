@@ -8,8 +8,8 @@ android {
         applicationId "com.material.management"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 45
-        versionName "2.5.11"
+        versionCode 46
+        versionName "2.5.12"
     }
     buildTypes {
         release {

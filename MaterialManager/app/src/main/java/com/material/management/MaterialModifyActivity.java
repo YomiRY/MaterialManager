@@ -29,7 +29,9 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+
 import com.android.datetimepicker.date.DatePickerDialog;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -44,6 +46,7 @@ import com.material.management.utils.DBUtility;
 import com.material.management.utils.FileUtility;
 import com.material.management.utils.Utility;
 import com.picasso.Picasso;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,8 +56,7 @@ import java.util.regex.Pattern;
 
 public class MaterialModifyActivity extends MMActivity implements AdapterView.OnItemSelectedListener,
         DialogInterface.OnClickListener, DatePickerDialog.OnDateSetListener {
-    public static final String ACTION_BAR_BTN_ACTION_ADD = "add_material";
-    public static final String ACTION_BAR_BTN_ACTION_CLEAR = "clear_user_input";
+
     private static final int REQ_CAMERA_TAKE_PIC = 1;
     private static final int REQ_SELECT_PICTURE = 2;
     private static final String DATEPICKER_TAG = "datepicker";
@@ -212,6 +214,18 @@ public class MaterialModifyActivity extends MMActivity implements AdapterView.On
     }
 
     @Override
+    protected void onStart() {
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
+        super.onStop();
+    }
+
+    @Override
     protected void onPause() {
         if (mInputDialog != null && mInputDialog.isDialogShowing())
             mInputDialog.setShowState(false);
@@ -325,27 +339,28 @@ public class MaterialModifyActivity extends MMActivity implements AdapterView.On
                 Material material = new Material();
                 String notificationDays = mEtNotificationDays.getText().toString().trim();
 
-                DBUtility.deleteMaterialInfo(mOldMaterial);
-
                 material.setName(mActMaterialName.getText().toString());
-                material.setBarcode(mBarcode);
-                material.setBarcodeFormat(mBarcodeFormat);
+                material.setBarcode((mBarcode != null && !mBarcode.isEmpty()) ? mBarcode : mOldMaterial.getBarcode());
+                material.setBarcodeFormat((mBarcodeFormat != null && !mBarcodeFormat.isEmpty()) ? mBarcodeFormat : mOldMaterial.getBarcodeFormat());
                 material.setMaterialType((String) mSpinMaterialCategory.getSelectedItem());
-                material.setIsAsPhotoType(0);
+                material.setIsAsPhotoType(mOldMaterial.getIsAsPhotoType());
                 material.setMaterialPlace(mActMaterialPlace.getText().toString());
                 material.setPurchaceDate(mPurchaceDate);
                 material.setValidDate(mValidDate);
                 /* We consider the user has set up the valid date in LoginMaterialFragment. */
                 material.setIsValidDateSetup(1);
                 material.setNotificationDays(notificationDays.isEmpty() ? 0 : Integer.parseInt(notificationDays));
-                material.setMaterialPic(mNewestBitmap);
+                material.setMaterialPic((mNewestBitmap != null) ? mNewestBitmap : mOldMaterial.getMaterialPic());
+                material.setMaterialPicPath((mNewestBitmap != null) ? "" : mOldMaterial.getMaterialPicPath());
                 material.setComment(mActComment.getText().toString());
 
                 String msg = isAllowSave(material);
                 if (msg == null) {
+                    DBUtility.deleteMaterialInfo(mOldMaterial);
                     DBUtility.insertMaterialInfo(material);
                     clearUserData();
                     showToast(getString(R.string.data_save_success));
+                    finish();
                 } else {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(this, R.style.AlertDialogTheme);
 
